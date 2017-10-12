@@ -6,5 +6,15 @@
     "iconFile": "resources/icon.png",
     "wipeColor": "#607d8b",
     "requestedPermissions": []
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require babel-register"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.8.0",
+    "mocha": "^4.0.1",
+    "should": "^13.1.2"
   }
 }
