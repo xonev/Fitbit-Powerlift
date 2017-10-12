@@ -1,0 +1,10 @@
+{
+  "fitbit": {
+    "appUUID": "f2a79376-dc15-4598-9ac0-eaa806815afb",
+    "appType": "app",
+    "appDisplayName": "PowerLift",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#607d8b",
+    "requestedPermissions": []
+  }
+}

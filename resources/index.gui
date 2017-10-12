@@ -1,0 +1,7 @@
+<svg id="app">
+  <svg id="page">
+    <use id="fire-activate" href="#square-button" y="5" fill="fb-green">
+      <set href="#text" attributeName="text-buffer" to="Fire activate" />
+    </use>
+  </svg>
+</svg>
