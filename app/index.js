@@ -1,6 +1,4 @@
-/*
- * Entry point for the watch app
- */
+// TODO: Wire up UI to core
 import document from 'document';
 
 console.log("App Started");

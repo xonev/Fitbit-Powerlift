@@ -1,9 +1,11 @@
-export function build(dependencies) {
-    const extern = {};
-
-    extern.addExercise = function(workout, exercise) {
-
+export function create() {
+    return {
+        exercises: []
     };
+}
 
-    return extern;
+export function addExercise(workout, exercise) {
+    if (!workout.exercises) {
+        throw new Error('Invalid workout');
+    }
 }

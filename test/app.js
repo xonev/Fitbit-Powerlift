@@ -4,14 +4,16 @@ import {build} from '../app/core/app';
 describe('app module', function() {
     describe('newWorkout', function() {
         describe('with initial app state', function() {
-            let workout;
+            let state;
 
             before(function() {
-                workout = build({}).newWorkout();
+                state = build({}).newWorkout();
             });
 
             it('creates a new, blank workout', function() {
-                should(workout).deepEqual({});
+                should(state.currentWorkout).deepEqual({
+                    exercises: []
+                });
             });
         });
     });
