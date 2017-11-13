@@ -1,6 +1,25 @@
-.defaultText {
-  font-size: 32;
+text {
   font-family: System-Regular;
   font-weight: regular;
-  text-length: 32;
+  font-size: 32;
+  fill: white;
+}
+
+.main-datum {
+  font-weight: bold;
+  font-size: 48;
+  text-anchor: middle;
+  x: 50%;
+  y: 30%;
+}
+
+#add-weight {
+  x: $;
+  y: 50%;
+  width: 50%;
+}
+
+#subtract-weight {
+  y: 50%;
+  width: 50%;
 }

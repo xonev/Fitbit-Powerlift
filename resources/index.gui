@@ -1,7 +1,13 @@
 <svg id="app">
   <svg id="page">
-    <use id="fire-activate" href="#square-button" y="5" fill="fb-green">
-      <set href="#text" attributeName="text-buffer" to="Fire activate" />
+    <text id="weight" class="main-datum">
+      5
+    </text>
+    <use id="subtract-weight" href="#square-button-neutral">
+      <set href="#text" attributeName="text-buffer" to="-5 lbs" />
+    </use>
+    <use id="add-weight" href="#square-button-neutral">
+      <set href="#text" attributeName="text-buffer" to="+5 lbs" />
     </use>
   </svg>
 </svg>

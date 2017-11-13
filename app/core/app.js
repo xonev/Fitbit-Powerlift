@@ -21,5 +21,13 @@ export function build(dependencies = {}, initialState = {}) {
 
     };
 
+    extern.addWeight = function(amount) {
+        state.currentWorkout.currentExercise.weight += amount;
+    };
+
+    extern.getCurrentExercise = function() {
+        return state.currentWorkout.currentExercise;
+    }
+
     return extern;
 }
