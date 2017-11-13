@@ -1,4 +1,10 @@
 export function merge(currentState, newState) {
-    //return Object.assign(currentState, newState);
-    return newState;
+    const ret = {};
+    for (let prop in currentState) {
+      ret[prop] = currentState[prop];
+    }
+    for (let prop in newState) {
+      ret[prop] = newState[prop];
+    }
+    return ret;
 }

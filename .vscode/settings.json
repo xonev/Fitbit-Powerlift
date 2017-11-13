@@ -1,0 +1,6 @@
+{
+    "prettier.tabWidth": 2,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.renderWhitespace": "all"
+}

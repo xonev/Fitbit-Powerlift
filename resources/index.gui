@@ -1,13 +1,16 @@
 <svg id="app">
-  <svg id="page">
-    <text id="weight" class="main-datum">
+  <svg id="weight-page">
+    <text id="main-datum">
       5
     </text>
-    <use id="subtract-weight" href="#square-button-neutral">
+    <use id="subtract-button" href="#square-button-neutral">
       <set href="#text" attributeName="text-buffer" to="-5 lbs" />
     </use>
-    <use id="add-weight" href="#square-button-neutral">
+    <use id="add-button" href="#square-button-neutral">
       <set href="#text" attributeName="text-buffer" to="+5 lbs" />
+    </use>
+    <use id="next-page-button" href="#square-button-positive">
+      <set href="#text" attributeName="text-buffer" to="To Reps" />
     </use>
   </svg>
 </svg>

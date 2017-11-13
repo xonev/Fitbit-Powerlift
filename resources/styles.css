@@ -5,7 +5,7 @@ text {
   fill: white;
 }
 
-.main-datum {
+#main-datum {
   font-weight: bold;
   font-size: 48;
   text-anchor: middle;
@@ -13,13 +13,17 @@ text {
   y: 30%;
 }
 
-#add-weight {
+#add-button {
   x: $;
   y: 50%;
   width: 50%;
 }
 
-#subtract-weight {
+#subtract-button {
   y: 50%;
   width: 50%;
+}
+
+#next-page-button {
+  y: 75%;
 }

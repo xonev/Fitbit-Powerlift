@@ -1,11 +1,11 @@
 export function create() {
-    return {
-        exercises: []
-    };
+  return {
+    exercises: []
+  };
 }
 
 export function addExercise(workout, exercise) {
-    if (!workout.exercises) {
-        throw new Error('Invalid workout');
-    }
+  if (!workout.exercises) {
+    throw new Error('Invalid workout');
+  }
 }
