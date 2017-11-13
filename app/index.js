@@ -8,7 +8,8 @@ const app = App.build({}, {
   currentWorkout: {
     exercises: [],
     currentExercise: {
-      weight: 5
+      weight: 5,
+      reps: 10
     }
   },
 });
@@ -24,22 +25,14 @@ const button2 = getElement('subtract-button');
 const weight = getElement('main-datum');
 const toRepsButton = getElement('next-page-button');
 
-function updateWeight() {
-  weight.text = `${app.getCurrentExercise().weight} lbs`;
-}
-
 button.onactivate = (e) => {
-  console.log('+5 lbs');
-  app.addWeight(5);
-  updateWeight();
+  ui.addButtonClicked();
 };
 
 button2.onactivate = (e) => {
-  console.log('-5 lbs');
-  app.addWeight(-5);
-  updateWeight();
+  ui.subtractButtonClicked();
 };
 
 toRepsButton.onactivate = (e) => {
-  ui.transitionTo(Pages.reps);
+  ui.nextPageClicked();
 };

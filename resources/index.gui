@@ -1,7 +1,7 @@
 <svg id="app">
   <svg id="weight-page">
     <text id="main-datum">
-      5
+      5 lbs
     </text>
     <use id="subtract-button" href="#square-button-neutral">
       <set href="#text" attributeName="text-buffer" to="-5 lbs" />

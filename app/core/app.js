@@ -23,7 +23,13 @@ export function build(dependencies = {}, initialState = {}) {
 
   extern.addWeight = function(amount) {
     state.currentWorkout.currentExercise.weight += amount;
+    return state.currentWorkout.currentExercise.weight;
   };
+
+  extern.addReps = function(amount) {
+    state.currentWorkout.currentExercise.reps += amount;
+    return state.currentWorkout.currentExercise.reps;
+  }
 
   extern.getCurrentExercise = function() {
     return state.currentWorkout.currentExercise;

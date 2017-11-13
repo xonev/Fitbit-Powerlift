@@ -10,20 +10,20 @@ text {
   font-size: 48;
   text-anchor: middle;
   x: 50%;
-  y: 30%;
+  y: 25%;
 }
 
 #add-button {
   x: $;
-  y: 50%;
+  y: 40%;
   width: 50%;
 }
 
 #subtract-button {
-  y: 50%;
+  y: 40%;
   width: 50%;
 }
 
 #next-page-button {
-  y: 75%;
+  y: $;
 }
