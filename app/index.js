@@ -1,24 +1,16 @@
-// TODO: Wire up UI to core
 import * as App from 'core/app';
 import * as UI from 'ui';
 import {Pages} from 'ui';
 import {getElement} from 'ui/util';
 
 const app = App.build({}, {
-  currentWorkout: {
-    exercises: [],
-    currentExercise: {
-      weight: 5,
-      reps: 10
-    }
-  },
 });
 
 const ui = UI.build({app}, {
-  currentPage: Pages.weight
 });
 
-console.log("App Started");
+ui.init();
+console.log("Initialized");
 
 const button = getElement('add-button');
 const button2 = getElement('subtract-button');

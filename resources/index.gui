@@ -1,16 +1,38 @@
 <svg id="app">
-  <svg id="weight-page">
-    <text id="main-datum">
-      5 lbs
-    </text>
-    <use id="subtract-button" href="#square-button-neutral">
-      <set href="#text" attributeName="text-buffer" to="-5 lbs" />
-    </use>
-    <use id="add-button" href="#square-button-neutral">
-      <set href="#text" attributeName="text-buffer" to="+5 lbs" />
-    </use>
-    <use id="next-page-button" href="#square-button-positive">
-      <set href="#text" attributeName="text-buffer" to="To Reps" />
-    </use>
-  </svg>
+  <text id="title"
+        font-weight="bold"
+        font-size="32"
+        y="15%"
+        text-anchor="middle"
+        fill="white">
+    The Title Goes Here
+  </text>
+  <text id="main-datum"
+    y="25%"
+    x="50%"
+    fill="white"
+    font-weight="bold"
+    font-size="48"
+    text-anchor="middle"
+    display="none"
+  >
+    Main Datum Goes Here
+  </text>
+  <textarea id="main-text"
+        font-weight="regular"
+        font-size="24"
+        y="30%">
+    The Main text goes here and it might be somewhat long.
+  </textarea>
+  <use id="subtract-button" href="#square-button-neutral">
+    <set href="#text" attributeName="text-buffer" to="Subtract Button" />
+  </use>
+  <use id="add-button" href="#square-button-neutral">
+    <set href="#text" attributeName="text-buffer" to="Add Button" />
+  </use>
+  <use id="list" href="#scrollview">
+  </use>
+  <use id="next-page-button" href="#square-button-positive">
+    <set href="#text" attributeName="text-buffer" to="Next Page Button" />
+  </use>
 </svg>
