@@ -8,7 +8,7 @@
     The Title Goes Here
   </text>
   <text id="main-datum"
-    y="25%"
+    y="60%"
     x="50%"
     fill="white"
     font-weight="bold"
@@ -21,7 +21,7 @@
   <textarea id="main-text"
         font-weight="regular"
         font-size="24"
-        y="30%">
+        y="75%">
     The Main text goes here and it might be somewhat long.
   </textarea>
   <use id="subtract-button" href="#square-button-neutral">

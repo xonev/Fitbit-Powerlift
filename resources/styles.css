@@ -24,18 +24,18 @@ textarea {
 
 #add-button {
   x: 50%;
-  y: 40%;
+  y: 70%;
   width: 50%;
   display: none;
 }
 
 #subtract-button {
   x: 0;
-  y: 40%;
+  y: 70%;
   width: 50%;
   display: none;
 }
 
 #next-page-button {
-  y: 70%;
+  y: 15%;
 }
