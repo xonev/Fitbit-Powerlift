@@ -12,3 +12,7 @@ export function addExercise(workout, exercise) {
   workout.currentExercise = exercise;
   return workout;
 }
+
+export function getNumExercises(workout) {
+  return workout.exercises.length;
+}

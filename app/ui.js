@@ -11,10 +11,23 @@ export const Pages = {
       'next-page-button'
     ],
     stateToPresentations: [],
-    nextPageId: 'weight',
+    nextPageId: 'exercises',
     beforeNextPage: (ui, app) => {
       app.newWorkout();
-      app.addExercise({weight: 20, reps: 10});
+    }
+  },
+  exercises: {
+    id: 'exercises',
+    activeElements: [
+      'title',
+      'list',
+      'main-text',
+      'next-page-button'
+    ],
+    stateToPresentations: [],
+    nextPageId: 'weight',
+    beforeNextPage: (ui, app) => {
+      app.addExercise({weight: 25, reps: 10});
     }
   },
   weight: {
@@ -88,6 +101,24 @@ const Transitions = {
 
       const nextPageButton = getElement('next-page-button');
       nextPageButton.text = '+ Workout';
+    },
+    exercises: (app) => {
+      const titleText = getElement('title');
+      titleText.text = 'PowerLift: Exercises';
+
+      const list = getElement('list');
+      const mainText = getElement('main-text');
+      if (app.getNumExercises() === 0) {
+        list
+        list.style.display = 'none';
+        mainText.style.display = 'inline';
+        mainText.text = 'You haven\'t added any exercises yet!';
+      } else {
+        mainText.style.display = 'none';
+      }
+
+      const nextPageButton = getElement('next-page-button');
+      nextPageButton.text = '+ Exercise';
     },
     weight: () => {
       const addButton = getElement('add-button');

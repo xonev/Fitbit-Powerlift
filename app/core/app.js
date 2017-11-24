@@ -44,6 +44,10 @@ export function build(dependencies = {}, initialState = {}) {
     return state;
   };
 
+  extern.getNumExercises = function() {
+    return Workout.getNumExercises(state.currentWorkout);
+  };
+
   extern.addExercise = function(exercise) {
     state.currentWorkout = Workout.addExercise(state.currentWorkout, exercise);
   };
