@@ -1,9 +1,11 @@
 text {
   font-family: System-Regular;
+  fill: white;
 }
 
 textarea {
   font-family: System-Regular;
+  fill: white;
 }
 
 #title {
@@ -38,4 +40,20 @@ textarea {
 
 #next-page-button {
   y: 15%;
+}
+
+.item-1 {
+  y: 20%;
+}
+
+.item-2 {
+  y: 45%;
+}
+
+.item-3 {
+  y: 70%;
+}
+
+.item-4 {
+  y: 95%;
 }

@@ -28,7 +28,7 @@ export const MuscleGroups = [
     name: 'Triceps'
   }
 ];
-
+/*
 export const ExercisesByGroup = [
   abs: [
     {
@@ -119,3 +119,4 @@ export const ExercisesByGroup = [
     }
   ]
 ];
+*/
