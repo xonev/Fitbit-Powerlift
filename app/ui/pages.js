@@ -32,7 +32,22 @@ export const Pages = {
     activeElements: [
       'title'
     ].concat(listItems).concat(scrollViews),
-    stateToPresentations: []
+    stateToPresentations: [],
+    listItemClicked: (ui, app, index) => {
+      app.selectMuscleGroupByIndex(index);
+      ui.transitionTo(Pages.exerciseSelection);
+    }
+  },
+  exerciseSelection: {
+    id: 'exerciseSelection',
+    activeElements: [
+      'title'
+    ].concat(listItems).concat(scrollViews),
+    stateToPresentations: [],
+    listItemClicked: (ui, app, index) => {
+      app.selectExerciseTypeByIndex(index);
+      ui.transitionTo(Pages.weight);
+    }
   },
   weight: {
     id: 'weight',

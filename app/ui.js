@@ -1,7 +1,8 @@
 import * as u from '../common/util';
-import {getElement} from 'ui/util';
+import * as uiu from 'ui/util';
 import {Pages} from 'ui/pages';
 import {Transitions} from 'ui/transitions';
+import document from 'document';
 
 export function build(dependencies = {}, initialState = {}) {
   const {app} = dependencies;
@@ -17,7 +18,7 @@ export function build(dependencies = {}, initialState = {}) {
 
   function load(page) {
     page.activeElements.forEach(elementId => {
-      getElement(elementId).style.display = 'inherit';
+      uiu.getElement(elementId).style.display = 'inherit';
     });
 
     if (Transitions['*'][page.id]) {
@@ -27,7 +28,7 @@ export function build(dependencies = {}, initialState = {}) {
     page.stateToPresentations.forEach(stateToPresentation => {
       const {elementId, elementAttribute, transform, statePathId} = stateToPresentation;
       const subscriptionId = app.subscribeToStateChange(statePathId, newState => {
-        getElement(elementId)[elementAttribute] = transform(newState);
+        uiu.getElement(elementId)[elementAttribute] = transform(newState);
       });
       state.stateChangeSubscriptions.push(subscriptionId);
     });
@@ -35,9 +36,9 @@ export function build(dependencies = {}, initialState = {}) {
     state.currentPage = page;
   }
 
-  function transitionTo(page) {
+  const transitionTo = extern.transitionTo = function(page) {
     state.currentPage.activeElements.forEach(elementId => {
-      getElement(elementId).style.display = 'none';
+      uiu.getElement(elementId).style.display = 'none';
     });
 
     state.stateChangeSubscriptions.forEach(app.unsubscribeFromStateChange);
@@ -68,6 +69,11 @@ export function build(dependencies = {}, initialState = {}) {
     }
     transitionTo(Pages[state.currentPage.nextPageId]);
   };
+
+  extern.listItemClicked = function(index) {
+    console.log(`item ${index} clicked`);
+    state.currentPage.listItemClicked(extern, app, index);
+  }
 
   return extern;
 }

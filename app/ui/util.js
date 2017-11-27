@@ -16,3 +16,7 @@ export function hideElement(elId) {
   const el = getElement(elId);
   el.style.display = 'none';
 }
+
+export function scrollTop() {
+  document.scrollTo(0, 0);
+}

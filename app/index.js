@@ -2,6 +2,7 @@ import * as App from 'core/app';
 import * as UI from 'ui';
 import {Pages} from 'ui';
 import {getElement} from 'ui/util';
+import {listItems} from 'ui/list';
 
 const app = App.build({}, {
 });
@@ -28,3 +29,9 @@ button2.onactivate = (e) => {
 toRepsButton.onactivate = (e) => {
   ui.nextPageClicked();
 };
+
+listItems.forEach((item, i) => {
+  getElement(item).onactivate = (e) => {
+    ui.listItemClicked(i);
+  };
+});

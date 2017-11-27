@@ -1,6 +1,6 @@
 import * as u from './util';
 import {hideListItems, renderList} from './list';
-import {MuscleGroups} from '../core/exercise';
+import {MuscleGroups, ExercisesByGroup} from '../core/exercise/exercise_types';
 
 export const Transitions = {
   '*': {
@@ -40,7 +40,14 @@ export const Transitions = {
       const titleText = u.getElement('title');
       titleText.text = 'PowerLift: Muscle Group';
 
-      renderList(MuscleGroups.map((group) => group.name));
+      renderList(MuscleGroups.map(group => group.name));
+    },
+    exerciseSelection: (app) => {
+      const titleText = u.getElement('title');
+      titleText.text = 'PowerLift: Exercise';
+
+      const exercises = ExercisesByGroup[app.getCurrentExercise().muscleGroup.id];
+      renderList(exercises.map(e => e.name));
     },
     weight: () => {
       const titleText = u.getElement('title');

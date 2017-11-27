@@ -1,5 +1,6 @@
 import * as u from '../../common/util';
 import * as Workout from './workout';
+import * as Exercise from './exercise';
 
 export function build(dependencies = {}, initialState = {}) {
   const extern = {};
@@ -62,6 +63,20 @@ export function build(dependencies = {}, initialState = {}) {
     state.currentWorkout.currentExercise.reps += amount;
     notifyStateChange('currentWorkout.currentExercise.reps', state.currentWorkout.currentExercise.reps);
     return state.currentWorkout.currentExercise.reps;
+  }
+
+  extern.selectMuscleGroupByIndex = function(index) {
+    state.currentWorkout.currentExercise = Exercise.selectMuscleGroupByIndex(
+      state.currentWorkout.currentExercise,
+      index
+    );
+  }
+
+  extern.selectExerciseTypeByIndex = function(index) {
+    state.currentWorkout.currentExercise = Exercise.selectExerciseTypeByIndex(
+      state.currentWorkout.currentExercise,
+      index
+    );
   }
 
   extern.getCurrentExercise = function() {
