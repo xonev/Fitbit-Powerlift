@@ -1,5 +1,5 @@
 // These configured numbers need to match up with what is in index.gui
-import {getElement, hideElement} from './util';
+import * as u from './util';
 
 const numListItems = 22;
 const numItemsPerScrollView = 4;
@@ -17,30 +17,36 @@ for (let i = 1; i < numScrollViews + 1; ++i) {
 }
 
 export function hideListItems() {
-  listItems.forEach(hideElement);
-  scrollViews.forEach(hideElement);
+  listItems.forEach(u.hideElement);
+  scrollViews.forEach(u.hideElement);
 }
 
 export function renderList(items) {
   const extraItems = numListItems % numItemsPerScrollView;
   const numScrollViewsNeeded = Math.floor(((items.length - extraItems) / numScrollViews) + 1);
   for (let i = 0; i < scrollViews.length; ++i) {
-    const scrollViewItem = getElement(scrollViews[i]);
+    const scrollViewItem = u.getElement(scrollViews[i]);
     if (i < numScrollViewsNeeded) {
       scrollViewItem.style.display = 'inherit';
     } else {
       scrollViewItem.style.display = 'none';
     }
 
+    // TODO: figure out how to set height of last list view. This doesn't work,
+    // but may be a place to start:
+    /*
     if (i + 1 === numScrollViewsNeeded) {
       const numItemsInLastView = (items.length - extraItems) % numItemsPerScrollView;
-      const heightPct = Math.floor(numItemsInLastView * (1 / numItemsPerScrollView) * 100);
-      scrollViewItem.style.height = `${heightPct}%`;
+      const height = u.deviceHeight * numItemsInLastView / numItemsPerScrollView;
+      scrollViewItem.style.height = height;
+    } else {
+      scrollViewItem.style.height = u.deviceHeight;
     }
+    */
   }
 
   for (let i = 0; i < listItems.length; ++i) {
-    const listItem = getElement(listItems[i]);
+    const listItem = u.getElement(listItems[i]);
     if (i < items.length) {
       listItem.text = items[i];
     } else {

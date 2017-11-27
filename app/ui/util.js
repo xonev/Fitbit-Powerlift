@@ -1,5 +1,8 @@
 import document from 'document';
 
+export const deviceHeight = 250;
+export const deviceWidth = 348;
+
 const elements = {};
 
 export function getElement(id) {
