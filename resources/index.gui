@@ -38,43 +38,82 @@
         <set href="#text" attributeName="text-buffer" to="Next Page Button" />
       </use>
 
-      <text id="list-item-1" class="list-item item-3">List Item 1</text>
-      <text id="list-item-2" class="list-item item-4">List Item 2</text>
+      <use id="list-item-1" href="#square-button-positive" class="list-item item-3">
+        <set href="#text" attributeName="text-buffer" to="List Item 1" />
+      </use>
+      <use id="list-item-2" href="#square-button-positive" class="list-item item-4">
+        <set href="#text" attributeName="text-buffer" to="List Item 2" />
+      </use>
     </use>
     <use href="#scrollview-item" id="scrollview-item-1">
-      <rect width="100%" height="250" fill="fb-red" />
-      <text id="list-item-3" class="list-item item-1">List Item 3</text>
-      <text id="list-item-4" class="list-item item-2">List Item 4</text>
-      <text id="list-item-5" class="list-item item-3">List Item 5</text>
-      <text id="list-item-6" class="list-item item-4">List Item 6</text>
+      <use id="list-item-3" href="#square-button-positive" class="list-item item-1">
+        <set href="#text" attributeName="text-buffer" to="List Item 3" />
+      </use>
+      <use id="list-item-4" href="#square-button-positive" class="list-item item-2">
+        <set href="#text" attributeName="text-buffer" to="List Item 4" />
+      </use>
+      <use id="list-item-5" href="#square-button-positive" class="list-item item-3">
+        <set href="#text" attributeName="text-buffer" to="List Item 5" />
+      </use>
+      <use id="list-item-6" href="#square-button-positive" class="list-item item-4">
+        <set href="#text" attributeName="text-buffer" to="List Item 6" />
+      </use>
     </use>
     <use href="#scrollview-item" id="scrollview-item-2">
-      <rect width="100%" height="250" fill="fb-blue" />
-      <text id="list-item-7" class="list-item item-1">List Item 7</text>
-      <text id="list-item-8" class="list-item item-2">List Item 8</text>
-      <text id="list-item-9" class="list-item item-3">List Item 9</text>
-      <text id="list-item-10" class="list-item item-4">List Item 10</text>
+      <use id="list-item-7" href="#square-button-positive" class="list-item item-1">
+        <set href="#text" attributeName="text-buffer" to="List Item 7" />
+      </use>
+      <use id="list-item-8" href="#square-button-positive" class="list-item item-2">
+        <set href="#text" attributeName="text-buffer" to="List Item 8" />
+      </use>
+      <use id="list-item-9" href="#square-button-positive" class="list-item item-3">
+        <set href="#text" attributeName="text-buffer" to="List Item 9" />
+      </use>
+      <use id="list-item-10" href="#square-button-positive" class="list-item item-4">
+        <set href="#text" attributeName="text-buffer" to="List Item 10" />
+      </use>
     </use>
     <use href="#scrollview-item" id="scrollview-item-3">
-      <rect width="100%" height="250" fill="fb-cyan" />
-      <text id="list-item-11" class="list-item item-1">List Item 11</text>
-      <text id="list-item-12" class="list-item item-2">List Item 12</text>
-      <text id="list-item-13" class="list-item item-3">List Item 13</text>
-      <text id="list-item-14" class="list-item item-4">List Item 14</text>
+      <use id="list-item-11" href="#square-button-positive" class="list-item item-1">
+        <set href="#text" attributeName="text-buffer" to="List Item 11" />
+      </use>
+      <use id="list-item-12" href="#square-button-positive" class="list-item item-2">
+        <set href="#text" attributeName="text-buffer" to="List Item 12" />
+      </use>
+      <use id="list-item-13" href="#square-button-positive" class="list-item item-3">
+        <set href="#text" attributeName="text-buffer" to="List Item 13" />
+      </use>
+      <use id="list-item-14" href="#square-button-positive" class="list-item item-4">
+        <set href="#text" attributeName="text-buffer" to="List Item 14" />
+      </use>
     </use>
     <use href="#scrollview-item" id="scrollview-item-4">
-      <rect width="100%" height="250" fill="fb-peach" />
-      <text id="list-item-15" class="list-item item-1">List Item 15</text>
-      <text id="list-item-16" class="list-item item-2">List Item 16</text>
-      <text id="list-item-17" class="list-item item-3">List Item 17</text>
-      <text id="list-item-18" class="list-item item-4">List Item 18</text>
+      <use id="list-item-15" href="#square-button-positive" class="list-item item-1">
+        <set href="#text" attributeName="text-buffer" to="List Item 15" />
+      </use>
+      <use id="list-item-16" href="#square-button-positive" class="list-item item-2">
+        <set href="#text" attributeName="text-buffer" to="List Item 16" />
+      </use>
+      <use id="list-item-17" href="#square-button-positive" class="list-item item-3">
+        <set href="#text" attributeName="text-buffer" to="List Item 17" />
+      </use>
+      <use id="list-item-18" href="#square-button-positive" class="list-item item-4">
+        <set href="#text" attributeName="text-buffer" to="List Item 18" />
+      </use>
     </use>
     <use href="#scrollview-item" id="scrollview-item-5">
-      <rect width="100%" height="250" fill="fb-blue" />
-      <text id="list-item-19" class="list-item item-1">List Item 19</text>
-      <text id="list-item-20" class="list-item item-2">List Item 20</text>
-      <text id="list-item-21" class="list-item item-3">List Item 21</text>
-      <text id="list-item-22" class="list-item item-4">List Item 22</text>
+      <use id="list-item-19" href="#square-button-positive" class="list-item item-1">
+        <set href="#text" attributeName="text-buffer" to="List Item 19" />
+      </use>
+      <use id="list-item-20" href="#square-button-positive" class="list-item item-2">
+        <set href="#text" attributeName="text-buffer" to="List Item 20" />
+      </use>
+      <use id="list-item-21" href="#square-button-positive" class="list-item item-3">
+        <set href="#text" attributeName="text-buffer" to="List Item 21" />
+      </use>
+      <use id="list-item-22" href="#square-button-positive" class="list-item item-4">
+        <set href="#text" attributeName="text-buffer" to="List Item 22" />
+      </use>
     </use>
   </use>
 </svg>
