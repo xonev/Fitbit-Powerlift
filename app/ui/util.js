@@ -8,3 +8,8 @@ export function getElement(id) {
   }
   return elements[id];
 }
+
+export function hideElement(elId) {
+  const el = getElement(elId);
+  el.style.display = 'none';
+}
