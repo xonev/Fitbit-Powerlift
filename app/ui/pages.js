@@ -108,10 +108,16 @@ export const Pages = {
     id: 'sets',
     activeElements: [
       'title',
-      'main-text',
       'next-page-button'
     ].concat(listItems).concat(scrollViews),
     stateToPresentations: [],
-    nextPageId: 'muscleGroupSelection'
+    nextPageId: 'weight',
+    beforeNextPage: (ui, app) => {
+      app.addSet();
+    },
+    listItemClicked: (ui, app, index) => {
+      app.selectSetByIndex(index);
+      ui.transitionTo(Pages.weight);
+    }
   }
 };

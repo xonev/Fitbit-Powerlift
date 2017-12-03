@@ -29,11 +29,24 @@ export function selectExerciseTypeByIndex(exercise, index) {
   return exercise;
 }
 
+export function addSet(exercise, set) {
+  exercise.currentSet = set;
+  exercise.sets.push(set);
+  return exercise;
+}
+
+export function getSets(exercise) {
+  return exercise.sets;
+}
+
+export function selectCurrentSetByIndex(exercise, index) {
+  exercise.currentSet = exercise.sets[index];
+  return exercise;
+}
+
 function ensureCurrentSet(exercise) {
   if (!exercise.currentSet) {
-    const set = Set.create();
-    exercise.currentSet = set;
-    exercise.sets.push(set);
+    exercise = addSet(exercise, Set.create());
   }
   return exercise;
 }

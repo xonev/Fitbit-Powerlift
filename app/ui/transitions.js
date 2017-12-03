@@ -75,11 +75,18 @@ export const Transitions = {
       addButton.text = '+1 Rep';
       subtractButton.text = '-1 Rep';
       mainDatum.text = '10 Reps';
-      nextPageButton.text = 'Add Set';
+      nextPageButton.text = 'Done';
     },
-    sets: () => {
+    sets: (app) => {
       const titleText = u.getElement('title');
-      titleText.text = 'PowerLift: Sets';
+      titleText.text = `${app.getCurrentExercise().type.name}: Sets`;
+
+      const nextPageButton = u.getElement('next-page-button');
+      nextPageButton.text = '+ Set';
+
+      renderList(app.getCurrentSets().map(
+        (set) => `${set.weight} lbs x ${set.reps} reps`
+      ));
     }
   }
 };

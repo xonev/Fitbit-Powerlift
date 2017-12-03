@@ -1,6 +1,7 @@
 import * as u from '../../common/util';
 import * as Workout from './workout';
 import * as Exercise from './exercise';
+import * as Set from './set';
 
 export function build(dependencies = {}, initialState = {}) {
   const extern = {};
@@ -53,9 +54,17 @@ export function build(dependencies = {}, initialState = {}) {
     return Workout.getExercises(state.currentWorkout);
   };
 
+  extern.getCurrentSets = function() {
+    return Exercise.getSets(state.currentWorkout.currentExercise);
+  }
+
   extern.addExercise = function() {
     state.currentWorkout = Workout.addExercise(state.currentWorkout, Exercise.create());
   };
+
+  extern.addSet = function() {
+    state.currentWorkout.currentExercise = Exercise.addSet(state.currentWorkout.currentExercise, Set.create());
+  }
 
   extern.addWeight = function(amount) {
     state.currentWorkout.currentExercise = Exercise.incrementCurrentSetWeight(
@@ -98,6 +107,13 @@ export function build(dependencies = {}, initialState = {}) {
   extern.selectExerciseByIndex = function(index) {
     state.currentWorkout.currentExercise = Workout.selectExerciseByIndex(
       state.currentWorkout,
+      index
+    );
+  }
+
+  extern.selectSetByIndex = function(index) {
+    state.currentWorkout.currentExercise = Exercise.selectCurrentSetByIndex(
+      state.currentWorkout.currentExercise,
       index
     );
   }
