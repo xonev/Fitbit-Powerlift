@@ -49,19 +49,35 @@ export function build(dependencies = {}, initialState = {}) {
     return Workout.getNumExercises(state.currentWorkout);
   };
 
-  extern.addExercise = function(exercise) {
-    state.currentWorkout = Workout.addExercise(state.currentWorkout, exercise);
+  extern.getExercises = function() {
+    return Workout.getExercises(state.currentWorkout);
+  };
+
+  extern.addExercise = function() {
+    state.currentWorkout = Workout.addExercise(state.currentWorkout, Exercise.create());
   };
 
   extern.addWeight = function(amount) {
-    state.currentWorkout.currentExercise.weight += amount;
-    notifyStateChange('currentWorkout.currentExercise.weight', state.currentWorkout.currentExercise.weight);
+    state.currentWorkout.currentExercise = Exercise.incrementCurrentSetWeight(
+      state.currentWorkout.currentExercise,
+      amount
+    );
+    notifyStateChange(
+      Exercise.notifyIds.currentSetWeight,
+      Exercise.getCurrentSetWeight(state.currentWorkout.currentExercise)
+    );
     return state.currentWorkout.currentExercise.weight;
   };
 
   extern.addReps = function(amount) {
-    state.currentWorkout.currentExercise.reps += amount;
-    notifyStateChange('currentWorkout.currentExercise.reps', state.currentWorkout.currentExercise.reps);
+    state.currentWorkout.currentExercise = Exercise.incrementCurrentSetReps(
+      state.currentWorkout.currentExercise,
+      amount
+    );
+    notifyStateChange(
+      Exercise.notifyIds.currentSetReps,
+      Exercise.getCurrentSetReps(state.currentWorkout.currentExercise)
+    );
     return state.currentWorkout.currentExercise.reps;
   }
 
@@ -75,6 +91,13 @@ export function build(dependencies = {}, initialState = {}) {
   extern.selectExerciseTypeByIndex = function(index) {
     state.currentWorkout.currentExercise = Exercise.selectExerciseTypeByIndex(
       state.currentWorkout.currentExercise,
+      index
+    );
+  }
+
+  extern.selectExerciseByIndex = function(index) {
+    state.currentWorkout.currentExercise = Workout.selectExerciseByIndex(
+      state.currentWorkout,
       index
     );
   }

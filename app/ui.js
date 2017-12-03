@@ -1,7 +1,7 @@
 import * as u from '../common/util';
-import * as uiu from 'ui/util';
-import {Pages} from 'ui/pages';
-import {Transitions} from 'ui/transitions';
+import * as uiu from './ui/util';
+import {Pages} from './ui/pages';
+import {Transitions} from './ui/transitions';
 import document from 'document';
 
 export function build(dependencies = {}, initialState = {}) {

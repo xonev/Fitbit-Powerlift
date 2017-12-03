@@ -31,6 +31,10 @@ export const Transitions = {
         mainText.text = 'You haven\'t added any exercises yet!';
       } else {
         mainText.style.display = 'none';
+        const noun = app.getCurrentExercise().sets.length === 1 ? 'set' : 'sets';
+        renderList(app.getExercises().map(
+          (exercise) => `${exercise.type.name}: ${exercise.sets.length} ${noun}`
+        ));
       }
 
       const nextPageButton = u.getElement('next-page-button');
@@ -72,6 +76,10 @@ export const Transitions = {
       subtractButton.text = '-1 Rep';
       mainDatum.text = '10 Reps';
       nextPageButton.text = 'Add Set';
+    },
+    sets: () => {
+      const titleText = u.getElement('title');
+      titleText.text = 'PowerLift: Sets';
     }
   }
 };

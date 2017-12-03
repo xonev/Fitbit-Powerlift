@@ -1,4 +1,5 @@
 import {listItems, scrollViews} from './list';
+import * as Exercise from '../core/exercise';
 
 export const Pages = {
   home: {
@@ -24,7 +25,11 @@ export const Pages = {
     stateToPresentations: [],
     nextPageId: 'muscleGroupSelection',
     beforeNextPage: (ui, app) => {
-      app.addExercise({weight: 25, reps: 10});
+      app.addExercise();
+    },
+    listItemClicked: (ui, app, index) => {
+      app.selectExerciseByIndex(index);
+      ui.transitionTo(Pages.sets);
     }
   },
   muscleGroupSelection: {
@@ -60,8 +65,7 @@ export const Pages = {
     ],
     stateToPresentations: [
       {
-        // TODO: need a current set here
-        statePathId: 'currentWorkout.currentExercise.weight',
+        statePathId: Exercise.notifyIds.currentSetWeight,
         elementId: 'main-datum',
         elementAttribute: 'text',
         transform: lbs => `${lbs} lbs`
@@ -86,8 +90,7 @@ export const Pages = {
     ],
     stateToPresentations: [
       {
-        // TODO: need a current set here
-        statePathId: 'currentWorkout.currentExercise.reps',
+        statePathId: Exercise.notifyIds.currentSetReps,
         elementId: 'main-datum',
         elementAttribute: 'text',
         transform: reps => `${reps} reps`
@@ -98,6 +101,17 @@ export const Pages = {
     },
     subtractButtonClicked: (ui, app) => {
       const newReps = app.addReps(-1);
-    }
+    },
+    nextPageId: 'exercises'
+  },
+  sets: {
+    id: 'sets',
+    activeElements: [
+      'title',
+      'main-text',
+      'next-page-button'
+    ].concat(listItems).concat(scrollViews),
+    stateToPresentations: [],
+    nextPageId: 'muscleGroupSelection'
   }
 };
