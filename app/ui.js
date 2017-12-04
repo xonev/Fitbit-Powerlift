@@ -4,6 +4,25 @@ import {Pages} from './ui/pages';
 import {Transitions} from './ui/transitions';
 import document from 'document';
 
+const tileList = uiu.getElement('tile-list');
+tileList.delegate = {
+  configureTile: (tile, tileInfo) => {
+    console.log('configuring tile');
+  },
+  getTileInfo: (position) => {
+    console.log(position);
+    if (position === 0) {
+      return {
+        type: 'main-tile-pool'
+      };
+    }
+    return {
+      type: 'editable-item-pool'
+    };
+  }
+};
+tileList.length = 20;
+
 export function build(dependencies = {}, initialState = {}) {
   const {app} = dependencies;
 
@@ -49,10 +68,12 @@ export function build(dependencies = {}, initialState = {}) {
     }
 
     load(page);
+    tileList.redraw();
   };
 
   extern.init = function() {
     load(state.currentPage);
+    tileList.redraw();
   };
 
   extern.addButtonClicked = function() {

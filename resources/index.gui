@@ -1,8 +1,31 @@
 <svg id="app">
-  <use id="list"
-       href="#scrollview"
-       >
-    <use href="#scrollview-item">
+
+
+  <defs>
+    <symbol id="test-item" pointer-events="visible" system-events="all" class='tile-item' href="#tile-list-item" display="none">
+      <rect id="tile-divider-top" class="tile-divider-top"/>
+      <rect class="tile-background-fill"/>
+      <text id="text" class="tile-primary-text fb-white">Test without animations</text>
+      <rect id="tile-divider-bottom" class="tile-divider-bottom"/>
+    </symbol>
+
+    <symbol id="editable-item" pointer-events="visible" system-events="all" class="editable-item" href="#tile-list-item" display="none">
+      <text id="item-title" class="editable-item-title">This is the title of an editable tile item.</text>
+      <use id="delete-button" href="#square-button-negative" class="small-button edit-button">
+        <set href="#text" attributeName="text-buffer" to="Delete" />
+      </use>
+      <use id="edit-button" href="#square-button-positive" class="small-button last-small-button edit-button">
+        <set href="#text" attributeName="text-buffer" to="Edit" />
+      </use>
+    </symbol>
+
+    <symbol id="selectable-item" pointer-events="visible" system-events="all" class="selectable-item" href="#tile-list-item" display="none">
+      <use id="edit-button" href="#square-button-positive" class="small-button last-small-button edit-button">
+        <set href="#text" attributeName="text-buffer" to="This is the title of a selectable tile item" />
+      </use>
+    </symbol>
+
+    <symbol id="main-tile" pointer-events="visible" display="none" href="#tile-list-item" display="none">
       <text id="title"
             font-weight="bold"
             font-size="32"
@@ -28,92 +51,44 @@
         The Main text goes here and it might be somewhat long.
       </textarea>
 
-      <use id="subtract-button" href="#square-button-neutral">
+      <use id="subtract-button" href="#square-button-neutral" class="small-button">
         <set href="#text" attributeName="text-buffer" to="Subtract Button" />
       </use>
-      <use id="add-button" href="#square-button-neutral">
+      <use id="add-button" href="#square-button-neutral" class="small-button last-small-button">
         <set href="#text" attributeName="text-buffer" to="Add Button" />
       </use>
       <use id="next-page-button" href="#square-button-positive">
         <set href="#text" attributeName="text-buffer" to="Next Page Button" />
       </use>
+    </symbol>
+  </defs>
 
-      <use id="list-item-1" href="#square-button-positive" class="list-item item-3">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 1" />
-      </use>
-      <use id="list-item-2" href="#square-button-positive" class="list-item item-4">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 2" />
-      </use>
+  <use id="tile-list" href="#tile-list">
+    <var id="virtual" value="1"/>
+    <!--<var id="align-mode" value="1" />-->
+
+    <use id="main-tile-pool" href="#tile-list-pool">
+      <use id="main-tile-pool[1]" href="#main-tile"/>
     </use>
-    <use href="#scrollview-item" id="scrollview-item-1">
-      <use id="list-item-3" href="#square-button-positive" class="list-item item-1">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 3" />
-      </use>
-      <use id="list-item-4" href="#square-button-positive" class="list-item item-2">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 4" />
-      </use>
-      <use id="list-item-5" href="#square-button-positive" class="list-item item-3">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 5" />
-      </use>
-      <use id="list-item-6" href="#square-button-positive" class="list-item item-4">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 6" />
-      </use>
+
+    <use id="editable-item-pool" href="#tile-list-pool">
+      <use id="editable-item-pool[1]" href="#editable-item"/>
+      <use id="editable-item-pool[2]" href="#editable-item"/>
+      <use id="editable-item-pool[3]" href="#editable-item"/>
+      <use id="editable-item-pool[4]" href="#editable-item"/>
+      <use id="editable-item-pool[5]" href="#editable-item"/>
     </use>
-    <use href="#scrollview-item" id="scrollview-item-2">
-      <use id="list-item-7" href="#square-button-positive" class="list-item item-1">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 7" />
-      </use>
-      <use id="list-item-8" href="#square-button-positive" class="list-item item-2">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 8" />
-      </use>
-      <use id="list-item-9" href="#square-button-positive" class="list-item item-3">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 9" />
-      </use>
-      <use id="list-item-10" href="#square-button-positive" class="list-item item-4">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 10" />
-      </use>
-    </use>
-    <use href="#scrollview-item" id="scrollview-item-3">
-      <use id="list-item-11" href="#square-button-positive" class="list-item item-1">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 11" />
-      </use>
-      <use id="list-item-12" href="#square-button-positive" class="list-item item-2">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 12" />
-      </use>
-      <use id="list-item-13" href="#square-button-positive" class="list-item item-3">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 13" />
-      </use>
-      <use id="list-item-14" href="#square-button-positive" class="list-item item-4">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 14" />
-      </use>
-    </use>
-    <use href="#scrollview-item" id="scrollview-item-4">
-      <use id="list-item-15" href="#square-button-positive" class="list-item item-1">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 15" />
-      </use>
-      <use id="list-item-16" href="#square-button-positive" class="list-item item-2">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 16" />
-      </use>
-      <use id="list-item-17" href="#square-button-positive" class="list-item item-3">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 17" />
-      </use>
-      <use id="list-item-18" href="#square-button-positive" class="list-item item-4">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 18" />
-      </use>
-    </use>
-    <use href="#scrollview-item" id="scrollview-item-5">
-      <use id="list-item-19" href="#square-button-positive" class="list-item item-1">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 19" />
-      </use>
-      <use id="list-item-20" href="#square-button-positive" class="list-item item-2">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 20" />
-      </use>
-      <use id="list-item-21" href="#square-button-positive" class="list-item item-3">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 21" />
-      </use>
-      <use id="list-item-22" href="#square-button-positive" class="list-item item-4">
-        <set href="#text" attributeName="text-buffer" to="Kneeling One Arm Row 22" />
-      </use>
+
+    <use id="selectable-item-pool" href="#tile-list-pool">
+      <use id="selectable-item-pool[1]" href="#selectable-item"/>
+      <use id="selectable-item-pool[2]" href="#selectable-item"/>
+      <use id="selectable-item-pool[3]" href="#selectable-item"/>
+      <use id="selectable-item-pool[4]" href="#selectable-item"/>
+      <use id="selectable-item-pool[5]" href="#selectable-item"/>
+      <use id="selectable-item-pool[6]" href="#selectable-item"/>
+      <use id="selectable-item-pool[7]" href="#selectable-item"/>
+      <use id="selectable-item-pool[8]" href="#selectable-item"/>
+      <use id="selectable-item-pool[9]" href="#selectable-item"/>
     </use>
   </use>
 </svg>

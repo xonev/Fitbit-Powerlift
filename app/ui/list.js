@@ -1,6 +1,12 @@
 // These configured numbers need to match up with what is in index.gui
 import * as u from './util';
 
+
+export const listItems = [];
+export const scrollViews = [];
+export function renderList() {}
+export function hideListItems() {}
+/*
 const numListItems = 22;
 const numItemsPerScrollView = 4;
 export const listItems = [
@@ -32,6 +38,7 @@ export function renderList(items) {
       scrollViewItem.style.display = 'none';
     }
 
+    */
     // TODO: figure out how to set height of last list view. This doesn't work,
     // but may be a place to start:
     /*
@@ -43,6 +50,7 @@ export function renderList(items) {
       scrollViewItem.style.height = u.deviceHeight;
     }
     */
+  /*
   }
 
   for (let i = 0; i < listItems.length; ++i) {
@@ -54,3 +62,4 @@ export function renderList(items) {
     }
   }
 }
+*/

@@ -8,6 +8,18 @@ textarea {
   fill: white;
 }
 
+#tile-list {
+  height: 250;
+}
+
+#main-tile {
+  height: 250;
+}
+
+.tile-item {
+  height: 250;
+}
+
 #title {
   font-weight: bold;
   font-size: 32;
@@ -25,16 +37,13 @@ textarea {
 }
 
 #add-button {
-  x: 50%;
   y: 70%;
-  width: 50%;
   display: none;
 }
 
 #subtract-button {
   x: 0;
   y: 70%;
-  width: 50%;
   display: none;
 }
 
@@ -42,18 +51,22 @@ textarea {
   y: 15%;
 }
 
-.item-1 {
-  y: -12;
+.small-button {
+  width: 50%;
 }
 
-.item-2 {
+.last-small-button {
+  x: 50%;
+}
+
+.edit-button {
+  y: 50%;
+}
+
+.editable-item {
+  height: 145;
+}
+
+.editable-item-title {
   y: 50;
-}
-
-.item-3 {
-  y: 112;
-}
-
-.item-4 {
-  y: 174;
 }
