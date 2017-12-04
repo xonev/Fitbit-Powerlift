@@ -29,9 +29,3 @@ button2.onactivate = (e) => {
 toRepsButton.onactivate = (e) => {
   ui.nextPageClicked();
 };
-
-listItems.forEach((item, i) => {
-  getElement(item).onactivate = (e) => {
-    ui.listItemClicked(i);
-  };
-});

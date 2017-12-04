@@ -2,13 +2,6 @@
 
 
   <defs>
-    <symbol id="test-item" pointer-events="visible" system-events="all" class='tile-item' href="#tile-list-item" display="none">
-      <rect id="tile-divider-top" class="tile-divider-top"/>
-      <rect class="tile-background-fill"/>
-      <text id="text" class="tile-primary-text fb-white">Test without animations</text>
-      <rect id="tile-divider-bottom" class="tile-divider-bottom"/>
-    </symbol>
-
     <symbol id="editable-item" pointer-events="visible" system-events="all" class="editable-item" href="#tile-list-item" display="none">
       <text id="item-title" class="editable-item-title">This is the title of an editable tile item.</text>
       <use id="delete-button" href="#square-button-negative" class="small-button edit-button">
@@ -20,18 +13,13 @@
     </symbol>
 
     <symbol id="selectable-item" pointer-events="visible" system-events="all" class="selectable-item" href="#tile-list-item" display="none">
-      <use id="edit-button" href="#square-button-positive" class="small-button last-small-button edit-button">
+      <use id="select-button" href="#square-button-positive" class="select-button">
         <set href="#text" attributeName="text-buffer" to="This is the title of a selectable tile item" />
       </use>
     </symbol>
 
     <symbol id="main-tile" pointer-events="visible" display="none" href="#tile-list-item" display="none">
-      <text id="title"
-            font-weight="bold"
-            font-size="32"
-            y="15%"
-            text-anchor="middle"
-      >
+      <text id="title">
         The Title Goes Here
       </text>
       <text id="main-datum"

@@ -1,6 +1,4 @@
 import * as u from './util';
-import {hideListItems, renderList} from './list';
-import {MuscleGroups, ExercisesByGroup} from '../core/exercise/exercise_types';
 
 export const Transitions = {
   '*': {
@@ -10,7 +8,6 @@ export const Transitions = {
 
       const mainText = u.getElement('main-text');
       if (app.getNumWorkouts() === 0) {
-        hideListItems();
         mainText.style.display = 'inherit';
         mainText.text = 'You haven\'t added any workouts yet!';
       } else {
@@ -26,15 +23,10 @@ export const Transitions = {
 
       const mainText = u.getElement('main-text');
       if (app.getNumExercises() === 0) {
-        hideListItems();
         mainText.style.display = 'inherit';
         mainText.text = 'You haven\'t added any exercises yet!';
       } else {
         mainText.style.display = 'none';
-        const noun = app.getCurrentExercise().sets.length === 1 ? 'set' : 'sets';
-        renderList(app.getExercises().map(
-          (exercise) => `${exercise.type.name}: ${exercise.sets.length} ${noun}`
-        ));
       }
 
       const nextPageButton = u.getElement('next-page-button');
@@ -43,15 +35,10 @@ export const Transitions = {
     muscleGroupSelection: (app) => {
       const titleText = u.getElement('title');
       titleText.text = 'PowerLift: Muscle Group';
-
-      renderList(MuscleGroups.map(group => group.name));
     },
     exerciseSelection: (app) => {
       const titleText = u.getElement('title');
       titleText.text = 'PowerLift: Exercise';
-
-      const exercises = ExercisesByGroup[app.getCurrentExercise().muscleGroup.id];
-      renderList(exercises.map(e => e.name));
     },
     weight: () => {
       const titleText = u.getElement('title');

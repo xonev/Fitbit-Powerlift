@@ -8,15 +8,7 @@ textarea {
   fill: white;
 }
 
-#tile-list {
-  height: 250;
-}
-
 #main-tile {
-  height: 250;
-}
-
-.tile-item {
   height: 250;
 }
 
@@ -24,7 +16,7 @@ textarea {
   font-weight: bold;
   font-size: 32;
   text-anchor: middle;
-  y: 15;
+  y: 37;
   x: 50%;
 }
 
@@ -48,7 +40,7 @@ textarea {
 }
 
 #next-page-button {
-  y: 15%;
+  y: 38;
 }
 
 .small-button {
@@ -69,4 +61,8 @@ textarea {
 
 .editable-item-title {
   y: 50;
+}
+
+.selectable-item {
+  height: 75;
 }

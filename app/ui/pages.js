@@ -1,61 +1,102 @@
-import {listItems, scrollViews} from './list';
 import * as Exercise from '../core/exercise';
+import { MuscleGroups, ExercisesByGroup } from '../core/exercise/exercise_types';
 
 export const Pages = {
   home: {
     id: 'home',
+    mainHeight: () => 250,
     activeElements: [
       'title',
       'main-text',
       'next-page-button'
-    ].concat(listItems).concat(scrollViews),
+    ],
     stateToPresentations: [],
     nextPageId: 'exercises',
     beforeNextPage: (ui, app) => {
       app.newWorkout();
+    },
+    getListLength: () => {
+      return 0;
     }
   },
   exercises: {
     id: 'exercises',
+    mainHeight: (ui, app) => app.getNumExercises() > 0 ? 125 : 250,
     activeElements: [
       'title',
       'main-text',
       'next-page-button'
-    ].concat(listItems).concat(scrollViews),
+    ],
     stateToPresentations: [],
     nextPageId: 'muscleGroupSelection',
     beforeNextPage: (ui, app) => {
       app.addExercise();
     },
-    listItemClicked: (ui, app, index) => {
-      app.selectExerciseByIndex(index);
-      ui.transitionTo(Pages.sets);
+    getListLength: (ui, app) => app.getNumExercises(),
+    getTileInfo: (ui, app, index) => ({
+        type: 'editable-item-pool',
+        index
+    }),
+    configureTile: (ui, app, tile, tileInfo) => {
+      const listIndex = tileInfo.index;
+      const exercise = app.getExercises()[listIndex];
+      const noun = exercise.sets.length === 1 ? 'set' : 'sets';
+      const title = tile.getElementById('item-title');
+      title.text = `${exercise.type.name}: ${exercise.sets.length} ${noun}`;
+
+      const edit = tile.getElementById('edit-button');
+      edit.onactivate = () => {
+        app.selectExerciseByIndex(listIndex);
+        ui.transitionTo(Pages.sets);
+      }
     }
   },
   muscleGroupSelection: {
     id: 'muscleGroupSelection',
+    mainHeight: () => 75,
     activeElements: [
       'title'
-    ].concat(listItems).concat(scrollViews),
+    ],
     stateToPresentations: [],
-    listItemClicked: (ui, app, index) => {
-      app.selectMuscleGroupByIndex(index);
-      ui.transitionTo(Pages.exerciseSelection);
+    getListLength: (ui, app) => MuscleGroups.length,
+    getTileInfo: (ui, app, index) => ({
+      type: 'selectable-item-pool',
+      index
+    }),
+    configureTile: (ui, app, tile, tileInfo) => {
+      const editButton = tile.getElementById('select-button');
+      editButton.text = MuscleGroups[tileInfo.index].name;
+      editButton.onactivate = () => {
+        app.selectMuscleGroupByIndex(tileInfo.index);
+        ui.transitionTo(Pages.exerciseSelection);
+      };
     }
   },
   exerciseSelection: {
     id: 'exerciseSelection',
+    mainHeight: () => 75,
     activeElements: [
       'title'
-    ].concat(listItems).concat(scrollViews),
+    ],
     stateToPresentations: [],
-    listItemClicked: (ui, app, index) => {
-      app.selectExerciseTypeByIndex(index);
-      ui.transitionTo(Pages.weight);
+    getListLength: (ui, app) => ExercisesByGroup[app.getCurrentExercise().muscleGroup.id].length,
+    getTileInfo: (ui, app, index) => ({
+      type: 'selectable-item-pool',
+      index
+    }),
+    configureTile: (ui, app, tile, tileInfo) => {
+      const editButton = tile.getElementById('select-button');
+      const exercises = ExercisesByGroup[app.getCurrentExercise().muscleGroup.id];
+      editButton.text = exercises[tileInfo.index].name;
+      editButton.onactivate = () => {
+        app.selectExerciseTypeByIndex(tileInfo.index);
+        ui.transitionTo(Pages.weight);
+      }
     }
   },
   weight: {
     id: 'weight',
+    mainHeight: () => 250,
     activeElements: [
       'title',
       'add-button',
@@ -81,6 +122,7 @@ export const Pages = {
   },
   reps: {
     id: 'reps',
+    mainHeight: () => 250,
     activeElements: [
       'title',
       'add-button',
@@ -105,11 +147,12 @@ export const Pages = {
     nextPageId: 'exercises'
   },
   sets: {
+    mainHeight: () => 125,
     id: 'sets',
     activeElements: [
       'title',
       'next-page-button'
-    ].concat(listItems).concat(scrollViews),
+    ],
     stateToPresentations: [],
     nextPageId: 'weight',
     beforeNextPage: (ui, app) => {

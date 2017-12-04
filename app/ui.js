@@ -4,31 +4,13 @@ import {Pages} from './ui/pages';
 import {Transitions} from './ui/transitions';
 import document from 'document';
 
-const tileList = uiu.getElement('tile-list');
-tileList.delegate = {
-  configureTile: (tile, tileInfo) => {
-    console.log('configuring tile');
-  },
-  getTileInfo: (position) => {
-    console.log(position);
-    if (position === 0) {
-      return {
-        type: 'main-tile-pool'
-      };
-    }
-    return {
-      type: 'editable-item-pool'
-    };
-  }
-};
-tileList.length = 20;
-
 export function build(dependencies = {}, initialState = {}) {
   const {app} = dependencies;
 
   const defaultInitialState = {
     currentPage: Pages.home,
-    stateChangeSubscriptions: []
+    stateChangeSubscriptions: [],
+    tileList: uiu.getElement('tile-list')
   };
 
   const state = u.merge(defaultInitialState, initialState);
@@ -53,6 +35,14 @@ export function build(dependencies = {}, initialState = {}) {
     });
 
     state.currentPage = page;
+
+    if (page.getListLength) {
+      // Add one for the main tile.
+      state.tileList.length = page.getListLength(extern, app) + 1;
+    } else {
+      state.tileList.length = 1;
+    }
+    state.tileList.redraw();
   }
 
   const transitionTo = extern.transitionTo = function(page) {
@@ -68,12 +58,36 @@ export function build(dependencies = {}, initialState = {}) {
     }
 
     load(page);
-    tileList.redraw();
   };
 
   extern.init = function() {
+    const {tileList} = state;
+    tileList.delegate = {
+      configureTile: (tile, tileInfo) => {
+        if (tileInfo.index === 0) {
+          tile.height = state.currentPage.mainHeight ? state.currentPage.mainHeight(extern, app) : 250;
+        } else if (state.currentPage.configureTile) {
+          state.currentPage.configureTile(
+            extern,
+            app,
+            tile,
+            u.merge(tileInfo, {index: tileInfo.index - 1})
+          );
+        }
+      },
+      getTileInfo: (index) => {
+        console.log(index);
+        if (index === 0) {
+          return {
+            type: 'main-tile-pool',
+            index
+          };
+        } else if (state.currentPage.getTileInfo) {
+          return state.currentPage.getTileInfo(extern, app, index);
+        }
+      }
+    };
     load(state.currentPage);
-    tileList.redraw();
   };
 
   extern.addButtonClicked = function() {
@@ -90,11 +104,6 @@ export function build(dependencies = {}, initialState = {}) {
     }
     transitionTo(Pages[state.currentPage.nextPageId]);
   };
-
-  extern.listItemClicked = function(index) {
-    console.log(`item ${index} clicked`);
-    state.currentPage.listItemClicked(extern, app, index);
-  }
 
   return extern;
 }
