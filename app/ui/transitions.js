@@ -70,10 +70,6 @@ export const Transitions = {
 
       const nextPageButton = u.getElement('next-page-button');
       nextPageButton.text = '+ Set';
-
-      renderList(app.getCurrentSets().map(
-        (set) => `${set.weight} lbs x ${set.reps} reps`
-      ));
     }
   }
 };

@@ -147,8 +147,8 @@ export const Pages = {
     nextPageId: 'exercises'
   },
   sets: {
-    mainHeight: () => 125,
     id: 'sets',
+    mainHeight: () => 125,
     activeElements: [
       'title',
       'next-page-button'
@@ -158,9 +158,21 @@ export const Pages = {
     beforeNextPage: (ui, app) => {
       app.addSet();
     },
-    listItemClicked: (ui, app, index) => {
-      app.selectSetByIndex(index);
-      ui.transitionTo(Pages.weight);
+    getListLength: (ui, app) => app.getCurrentSets().length,
+    getTileInfo: (ui, app, index) => ({
+      type: 'editable-item-pool',
+      index
+    }),
+    configureTile: (ui, app, tile, tileInfo) => {
+      const title = tile.getElementById('item-title');
+      const set = app.getCurrentSets()[tileInfo.index];
+      title.text = `${set.weight} lbs x ${set.reps} reps`;
+
+      const edit = tile.getElementById('edit-button');
+      edit.onactivate = () => {
+        app.selectSetByIndex(tileInfo.index);
+        ui.transitionTo(Pages.weight);
+      };
     }
   }
 };
