@@ -76,7 +76,6 @@ export function build(dependencies = {}, initialState = {}) {
         }
       },
       getTileInfo: (index) => {
-        console.log(index);
         if (index === 0) {
           return {
             type: 'main-tile-pool',

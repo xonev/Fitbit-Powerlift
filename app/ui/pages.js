@@ -90,6 +90,7 @@ export const Pages = {
       editButton.text = exercises[tileInfo.index].name;
       editButton.onactivate = () => {
         app.selectExerciseTypeByIndex(tileInfo.index);
+        app.addSet();
         ui.transitionTo(Pages.weight);
       }
     }

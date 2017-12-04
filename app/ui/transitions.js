@@ -40,7 +40,7 @@ export const Transitions = {
       const titleText = u.getElement('title');
       titleText.text = 'PowerLift: Exercise';
     },
-    weight: () => {
+    weight: (app) => {
       const titleText = u.getElement('title');
       titleText.text = 'PowerLift: Set Weight';
       const addButton = u.getElement('add-button');
@@ -52,7 +52,7 @@ export const Transitions = {
       mainDatum.text = '20 lbs';
       nextPageButton.text = 'To Reps';
     },
-    reps: () => {
+    reps: (app) => {
       const titleText = u.getElement('title');
       titleText.text = 'PowerLift: Set Reps';
       const addButton = u.getElement('add-button');

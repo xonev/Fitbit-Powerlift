@@ -1,9 +1,11 @@
-export function create() {
-  return {
+import * as u from '../../common/util';
+
+export function create(overrides = {}) {
+  return u.merge({
     weight: 25,
     reps: 10,
     createdAt: new Date
-  };
+  }, overrides);
 }
 
 export function incrementWeight(set, amount) {

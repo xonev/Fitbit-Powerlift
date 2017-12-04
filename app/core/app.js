@@ -7,12 +7,31 @@ export function build(dependencies = {}, initialState = {}) {
   const extern = {};
   const defaultInitialState = {
     workouts: [],
-    currentWorkout: null
+    currentWorkout: null,
+    lastSets: {}
   };
 
   let state = u.merge(defaultInitialState, initialState);
   const stateChangeSubscriptions = {};
   let idCount = 0;
+
+  function notifyStateChange(statePathId, value) {
+    if (!stateChangeSubscriptions[statePathId]) return;
+    const keys = Object.keys(stateChangeSubscriptions[statePathId]);
+    keys.forEach(key => stateChangeSubscriptions[statePathId][key](value, state));
+  }
+
+  function getState(statePathId) {
+    const path = statePathId.split('.');
+    return path.reduce((val, pathComponent, index) => {
+      if (typeof val === 'object' && val !== null) {
+        return val[pathComponent];
+      } else if (index !== path.length) {
+        return null;
+      }
+      return val;
+    }, state);
+  }
 
   extern.subscribeToStateChange = function(statePathId, callback) {
     if (!stateChangeSubscriptions[statePathId]) {
@@ -21,17 +40,12 @@ export function build(dependencies = {}, initialState = {}) {
     const id = idCount;
     idCount += 1;
     stateChangeSubscriptions[statePathId][id] = callback;
+    callback(getState(statePathId), state);
     return {statePathId, id};
   };
 
   extern.unsubscribeFromStateChange = function({statePathId, id}) {
     delete stateChangeSubscriptions[statePathId][id];
-  }
-
-  function notifyStateChange(statePathId, value) {
-    if (!stateChangeSubscriptions[statePathId]) return;
-    const keys = Object.keys(stateChangeSubscriptions[statePathId]);
-    keys.forEach(key => stateChangeSubscriptions[statePathId][key](value, state));
   }
 
   extern.getNumWorkouts = function() {
@@ -63,7 +77,24 @@ export function build(dependencies = {}, initialState = {}) {
   };
 
   extern.addSet = function() {
-    state.currentWorkout.currentExercise = Exercise.addSet(state.currentWorkout.currentExercise, Set.create());
+    let set;
+    if (
+      state.currentWorkout.currentExercise.type &&
+      state.lastSets[state.currentWorkout.currentExercise.type.id]
+    ) {
+      const {id} = state.currentWorkout.currentExercise.type;
+      const {weight, reps} = state.lastSets[id];
+      set = Set.create({
+        weight,
+        reps
+      });
+    } else {
+      set = Set.create()
+    }
+    state.currentWorkout.currentExercise = Exercise.addSet(
+      state.currentWorkout.currentExercise,
+      set
+    );
   }
 
   extern.addWeight = function(amount) {
@@ -75,7 +106,11 @@ export function build(dependencies = {}, initialState = {}) {
       Exercise.notifyIds.currentSetWeight,
       Exercise.getCurrentSetWeight(state.currentWorkout.currentExercise)
     );
-    return state.currentWorkout.currentExercise.weight;
+    const {currentExercise} = state.currentWorkout;
+    const {currentSet} = currentExercise;
+
+    state.lastSets[currentExercise.type.id] = currentSet;
+    return state.currentWorkout.currentExercise.currentSet.weight;
   };
 
   extern.addReps = function(amount) {
@@ -87,7 +122,11 @@ export function build(dependencies = {}, initialState = {}) {
       Exercise.notifyIds.currentSetReps,
       Exercise.getCurrentSetReps(state.currentWorkout.currentExercise)
     );
-    return state.currentWorkout.currentExercise.reps;
+    const {currentExercise} = state.currentWorkout;
+    const {currentSet} = currentExercise;
+
+    state.lastSets[currentExercise.type.id] = currentSet;
+    return state.currentWorkout.currentExercise.currentSet.reps;
   }
 
   extern.selectMuscleGroupByIndex = function(index) {
