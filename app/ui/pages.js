@@ -16,6 +16,7 @@ export const Pages = {
     prevPageId: 'stats',
     beforeNextPage: (ui, app) => {
       app.newWorkout();
+      app.save();
     },
     getListLength: (ui, app) => app.getNumWorkouts(),
     getTileInfo: (ui, app, index) => ({
@@ -26,7 +27,7 @@ export const Pages = {
       const workout = app.getWorkouts()[tileInfo.index];
       const noun = workout.exercises.length === 1 ? 'exercise' : 'exercises';
       const title = tile.getElementById('item-title');
-      title.text = `${workout.createdAt.toLocaleDateString()}: ${workout.exercises.length} exercises`;
+      title.text = `${new Date(workout.createdAt).toLocaleDateString()}: ${workout.exercises.length} exercises`;
 
       const edit = tile.getElementById('edit-button');
       edit.onactivate = () => {
@@ -108,6 +109,7 @@ export const Pages = {
       editButton.text = exercises[tileInfo.index].name;
       editButton.onactivate = () => {
         app.selectExerciseTypeByIndex(tileInfo.index);
+        app.save();
         app.addSet();
         ui.transitionTo(Pages.weight);
       }
@@ -168,6 +170,7 @@ export const Pages = {
       const newReps = app.addReps(-1);
     },
     nextPageId: 'exercises',
+    beforeNextPage: (ui, app) => app.save(),
     prevPageId: 'weight'
   },
   sets: {

@@ -1,7 +1,7 @@
 export function create() {
   return {
     exercises: [],
-    createdAt: new Date
+    createdAt: new Date().toISOString()
   };
 }
 

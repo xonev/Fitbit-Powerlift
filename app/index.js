@@ -1,11 +1,12 @@
 import * as App from 'core/app';
 import * as UI from 'ui';
+import * as Persistence from './persistence/state';
 import {Pages} from 'ui';
 import {getElement} from 'ui/util';
 import {listItems} from 'ui/list';
 
-const app = App.build({}, {
-});
+const persistence = Persistence.build({});
+const app = App.build({persistence}, persistence.loadState());
 
 const ui = UI.build({app}, {
 });

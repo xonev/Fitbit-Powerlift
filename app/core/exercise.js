@@ -12,7 +12,7 @@ export function create() {
     type: null,
     sets: [],
     currentSet: null,
-    createdAt: new Date
+    createdAt: new Date().toISOString()
   };
 }
 

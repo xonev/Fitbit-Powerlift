@@ -4,6 +4,9 @@ import * as Exercise from './exercise';
 import * as Set from './set';
 
 export function build(dependencies = {}, initialState = {}) {
+  initialState = initialState ? initialState : {};
+
+  const {persistence} = dependencies;
   const extern = {};
   const defaultInitialState = {
     workouts: [],
@@ -31,6 +34,14 @@ export function build(dependencies = {}, initialState = {}) {
       }
       return val;
     }, state);
+  }
+
+  function saveState() {
+    const {workouts, lastSets} = state;
+    persistence.saveState({
+      workouts,
+      lastSets
+    });
   }
 
   extern.subscribeToStateChange = function(statePathId, callback) {
@@ -108,7 +119,6 @@ export function build(dependencies = {}, initialState = {}) {
   }
 
   extern.removeCurrentSet = function() {
-    console.log('removing current set');
     state.currentWorkout.currentExercise = Exercise.removeCurrentSet(state.currentWorkout.currentExercise);
     return state.currentWorkout.currentExercise;
   };
@@ -144,6 +154,8 @@ export function build(dependencies = {}, initialState = {}) {
     state.lastSets[currentExercise.type.id] = currentSet;
     return state.currentWorkout.currentExercise.currentSet.reps;
   }
+
+  extern.save = saveState;
 
   extern.selectWorkoutByIndex = function(index) {
     state.currentWorkout = state.workouts[index]

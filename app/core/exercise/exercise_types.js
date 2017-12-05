@@ -72,7 +72,7 @@ export const ExercisesByGroup = {
       name: 'Side Plank'
     }
   ],
-  back: [
+ /* back: [
     {
       id: 'back-1',
       name: 'Barbell Row'
@@ -315,7 +315,7 @@ export const ExercisesByGroup = {
       id: 'legs-18',
       name: 'Sumo Deadlift'
     }
-  ],
+  ],*/ /*
   shoulders: [
     {
       id: 'shoulders-1',
@@ -443,5 +443,5 @@ export const ExercisesByGroup = {
       id: 'triceps-14',
       name: 'V-Bar Push Down'
     }
-  ]
+  ]*/
 };

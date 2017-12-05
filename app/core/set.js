@@ -4,7 +4,7 @@ export function create(overrides = {}) {
   return u.merge({
     weight: 25,
     reps: 10,
-    createdAt: new Date
+    createdAt: new Date().toISOString()
   }, overrides);
 }
 
