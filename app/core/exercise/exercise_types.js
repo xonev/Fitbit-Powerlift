@@ -187,7 +187,7 @@ export const ExercisesByGroup = {
       id: 'biceps-10',
       name: 'Seated Machine Curl'
     }
-  ]
+  ],
   chest: [
     {
       id: 'chest-1',
@@ -234,7 +234,7 @@ export const ExercisesByGroup = {
       name: 'Incline Hammer Strength Chest Press'
     },
     {
-      id: 'chest-12,
+      id: 'chest-12',
       name: 'Push Up'
     },
     {
@@ -300,7 +300,7 @@ export const ExercisesByGroup = {
       name: 'Seated Calf Raise Machine'
     },
     {
-      id: 'legs-15,
+      id: 'legs-15',
       name: 'Seated Leg Curl Machine'
     },
     {
@@ -374,7 +374,7 @@ export const ExercisesByGroup = {
       name: 'Seated Dumbbell Lateral Raise'
     },
     {
-      id: 'shoulders-15,
+      id: 'shoulders-15',
       name: 'Seated Dumbbell Press'
     },
     {
