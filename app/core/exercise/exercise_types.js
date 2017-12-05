@@ -1,4 +1,4 @@
-export const MuscleGroups = [
+export const MuscleGroups = () => [
   {
     id: 'abs',
     name: 'Abs'
@@ -30,7 +30,7 @@ export const MuscleGroups = [
 ];
 
 export const ExercisesByGroup = {
-  abs: [
+  abs: () => [
     {
       id: 'abs-1',
       name: 'Ab-Wheel Rollout'
@@ -72,7 +72,7 @@ export const ExercisesByGroup = {
       name: 'Side Plank'
     }
   ],
- /* back: [
+  back: () => [
     {
       id: 'back-1',
       name: 'Barbell Row'
@@ -146,7 +146,7 @@ export const ExercisesByGroup = {
       name: 'T-Bar Row'
     }
   ],
-  biceps: [
+  biceps: () => [
     {
       id: 'biceps-1',
       name: 'Barbell Curl'
@@ -188,7 +188,7 @@ export const ExercisesByGroup = {
       name: 'Seated Machine Curl'
     }
   ],
-  chest: [
+  chest: () => [
     {
       id: 'chest-1',
       name: 'Cable Crossover'
@@ -242,7 +242,7 @@ export const ExercisesByGroup = {
       name: 'Seated Machine Fly'
     }
   ],
-  legs: [
+  legs: () => [
     {
       id: 'legs-1',
       name: 'Barbell Calf Raise'
@@ -315,8 +315,8 @@ export const ExercisesByGroup = {
       id: 'legs-18',
       name: 'Sumo Deadlift'
     }
-  ],*/ /*
-  shoulders: [
+  ],
+  shoulders: () => [
     {
       id: 'shoulders-1',
       name: 'Arnold Dumbbell Press'
@@ -386,7 +386,7 @@ export const ExercisesByGroup = {
       name: 'Smith Machine Overhead Press'
     }
   ],
-  triceps: [
+  triceps: () => [
     {
       id: 'triceps-1',
       name: 'Cable Overhead Triceps Extension'
@@ -443,5 +443,5 @@ export const ExercisesByGroup = {
       id: 'triceps-14',
       name: 'V-Bar Push Down'
     }
-  ]*/
+  ]
 };

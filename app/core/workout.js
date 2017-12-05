@@ -1,3 +1,5 @@
+import * as u from '../../common/util';
+
 export function create() {
   return {
     exercises: [],
@@ -13,7 +15,7 @@ export function addExercise(workout, exercise) {
   if (!workout.exercises) {
     throw new Error('Invalid workout');
   }
-  workout.exercises.unshift(exercise);
+  workout.exercises = u.prependWithMaxLength(5, workout.exercises, exercise);
   workout.currentExercise = exercise;
   return workout;
 }

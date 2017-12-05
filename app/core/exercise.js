@@ -1,3 +1,4 @@
+import * as u from '../../common/util';
 import {MuscleGroups, ExercisesByGroup} from './exercise/exercise_types';
 import * as Set from './set';
 
@@ -17,7 +18,7 @@ export function create() {
 }
 
 export function selectMuscleGroupByIndex(exercise, index) {
-  exercise.muscleGroup = MuscleGroups[index];
+  exercise.muscleGroup = MuscleGroups()[index];
   return exercise;
 }
 
@@ -25,13 +26,13 @@ export function selectExerciseTypeByIndex(exercise, index) {
   if (!exercise.muscleGroup) {
     throw new Error('Must have a muscle group first');
   }
-  exercise.type = ExercisesByGroup[exercise.muscleGroup.id][index];
+  exercise.type = ExercisesByGroup[exercise.muscleGroup.id]()[index];
   return exercise;
 }
 
 export function addSet(exercise, set) {
   exercise.currentSet = set;
-  exercise.sets.unshift(set);
+  exercise.sets = u.prependWithMaxLength(10, exercise.sets, set);
   return exercise;
 }
 

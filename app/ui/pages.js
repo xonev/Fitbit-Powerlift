@@ -77,14 +77,14 @@ export const Pages = {
       'title'
     ],
     stateToPresentations: [],
-    getListLength: (ui, app) => MuscleGroups.length,
+    getListLength: (ui, app) => MuscleGroups().length,
     getTileInfo: (ui, app, index) => ({
       type: 'selectable-item-pool',
       index
     }),
     configureTile: (ui, app, tile, tileInfo) => {
       const editButton = tile.getElementById('select-button');
-      editButton.text = MuscleGroups[tileInfo.index].name;
+      editButton.text = MuscleGroups()[tileInfo.index].name;
       editButton.onactivate = () => {
         app.selectMuscleGroupByIndex(tileInfo.index);
         ui.transitionTo(Pages.exerciseSelection);
@@ -98,14 +98,14 @@ export const Pages = {
       'title'
     ],
     stateToPresentations: [],
-    getListLength: (ui, app) => ExercisesByGroup[app.getCurrentExercise().muscleGroup.id].length,
+    getListLength: (ui, app) => ExercisesByGroup[app.getCurrentExercise().muscleGroup.id]().length,
     getTileInfo: (ui, app, index) => ({
       type: 'selectable-item-pool',
       index
     }),
     configureTile: (ui, app, tile, tileInfo) => {
       const editButton = tile.getElementById('select-button');
-      const exercises = ExercisesByGroup[app.getCurrentExercise().muscleGroup.id];
+      const exercises = ExercisesByGroup[app.getCurrentExercise().muscleGroup.id]();
       editButton.text = exercises[tileInfo.index].name;
       editButton.onactivate = () => {
         app.selectExerciseTypeByIndex(tileInfo.index);

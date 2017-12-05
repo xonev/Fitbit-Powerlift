@@ -8,3 +8,11 @@ export function merge(currentState, newState) {
     }
     return ret;
 }
+
+export function prependWithMaxLength(maxLength, list, item) {
+  list.unshift(item);
+  if (list.length > maxLength) {
+    list.splice(list.length - 1, list.length - maxLength);
+  }
+  return list;
+}
