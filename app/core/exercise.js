@@ -30,9 +30,17 @@ export function selectExerciseTypeByIndex(exercise, index) {
   return exercise;
 }
 
+export function getShortName(exercise) {
+  if (exercise.type.name.length < 18) {
+    return exercise.type.name;
+  } else {
+    return `${exercise.type.name.slice(0, 15)}...`;
+  }
+}
+
 export function addSet(exercise, set) {
   exercise.currentSet = set;
-  exercise.sets = u.prependWithMaxLength(7, exercise.sets, set);
+  exercise.sets = u.prependWithMaxLength(5, exercise.sets, set);
   return exercise;
 }
 

@@ -1,4 +1,5 @@
 import * as u from './util';
+import * as Exercise from '../core/exercise';
 
 export const Transitions = {
   '*': {
@@ -74,7 +75,7 @@ export const Transitions = {
     },
     sets: (app) => {
       const titleText = u.getElement('title');
-      titleText.text = `${app.getCurrentExercise().type.name}: Sets`;
+      titleText.text = `${Exercise.getShortName(app.getCurrentExercise())}: Sets`;
 
       const nextPageButton = u.getElement('next-page-button');
       nextPageButton.text = '+ Set';

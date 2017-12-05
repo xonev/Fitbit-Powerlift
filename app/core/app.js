@@ -75,7 +75,7 @@ export function build(dependencies = {}, initialState = {}) {
     state = u.merge(state, {
       currentWorkout: workout
     });
-    state.workouts = u.prependWithMaxLength(5, state.workouts, workout);
+    state.workouts = u.prependWithMaxLength(3, state.workouts, workout);
     notifyStateChange('currentWorkout', state.currentWorkout);
     return state;
   };

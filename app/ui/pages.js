@@ -59,7 +59,7 @@ export const Pages = {
       const exercise = app.getExercises()[listIndex];
       const noun = exercise.sets.length === 1 ? 'set' : 'sets';
       const title = tile.getElementById('item-title');
-      title.text = `${Exercise.shortName(exercise)}: ${exercise.sets.length} ${noun}`;
+      title.text = `${Exercise.getShortName(exercise)}: ${exercise.sets.length} ${noun}`;
 
       const edit = tile.getElementById('edit-button');
       edit.onactivate = () => {
