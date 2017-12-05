@@ -2,6 +2,7 @@ import * as u from '../../common/util';
 import * as Workout from './workout';
 import * as Exercise from './exercise';
 import * as Set from './set';
+import {me} from 'appbit';
 
 export function build(dependencies = {}, initialState = {}) {
   initialState = initialState ? initialState : {};
@@ -43,6 +44,8 @@ export function build(dependencies = {}, initialState = {}) {
       lastSets
     });
   }
+
+  me.onunload = saveState;
 
   extern.subscribeToStateChange = function(statePathId, callback) {
     if (!stateChangeSubscriptions[statePathId]) {
@@ -154,8 +157,6 @@ export function build(dependencies = {}, initialState = {}) {
     state.lastSets[currentExercise.type.id] = currentSet;
     return state.currentWorkout.currentExercise.currentSet.reps;
   }
-
-  extern.save = saveState;
 
   extern.selectWorkoutByIndex = function(index) {
     state.currentWorkout = state.workouts[index]

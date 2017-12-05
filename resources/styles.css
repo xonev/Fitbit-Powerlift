@@ -49,6 +49,7 @@ textarea {
   y: 43;
   x: 0;
   width: 50%;
+  display: 'none';
 }
 
 .small-button {

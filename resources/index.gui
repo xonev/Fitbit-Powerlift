@@ -2,10 +2,10 @@
   <defs>
     <symbol id="editable-item" pointer-events="visible" system-events="all" class="editable-item" href="#tile-list-item" display="none">
       <text id="item-title" class="editable-item-title">This is the title of an editable tile item.</text>
-      <use id="delete-button" href="#square-button-negative" class="small-button edit-button">
+      <!--<use id="delete-button" href="#square-button-negative" class="small-button edit-button">
         <set href="#text" attributeName="text-buffer" to="Delete" />
-      </use>
-      <use id="edit-button" href="#square-button-positive" class="small-button last-small-button edit-button">
+      </use>-->
+      <use id="edit-button" href="#square-button-positive" class="edit-button">
         <set href="#text" attributeName="text-buffer" to="Edit" />
       </use>
     </symbol>
@@ -21,7 +21,7 @@
         The Title Goes Here
       </text>
       <text id="main-datum"
-        y="60%"
+        y="65%"
         x="50%"
         font-weight="bold"
         font-size="48"

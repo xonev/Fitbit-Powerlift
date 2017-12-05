@@ -32,7 +32,7 @@ export function selectExerciseTypeByIndex(exercise, index) {
 
 export function addSet(exercise, set) {
   exercise.currentSet = set;
-  exercise.sets = u.prependWithMaxLength(10, exercise.sets, set);
+  exercise.sets = u.prependWithMaxLength(7, exercise.sets, set);
   return exercise;
 }
 

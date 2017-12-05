@@ -8,7 +8,6 @@ export const Pages = {
     activeElements: [
       'title',
       'main-text',
-      'home-button',
       'next-page-button'
     ],
     stateToPresentations: [],
@@ -16,7 +15,6 @@ export const Pages = {
     prevPageId: 'stats',
     beforeNextPage: (ui, app) => {
       app.newWorkout();
-      app.save();
     },
     getListLength: (ui, app) => app.getNumWorkouts(),
     getTileInfo: (ui, app, index) => ({
@@ -61,7 +59,7 @@ export const Pages = {
       const exercise = app.getExercises()[listIndex];
       const noun = exercise.sets.length === 1 ? 'set' : 'sets';
       const title = tile.getElementById('item-title');
-      title.text = `${exercise.type.name}: ${exercise.sets.length} ${noun}`;
+      title.text = `${Exercise.shortName(exercise)}: ${exercise.sets.length} ${noun}`;
 
       const edit = tile.getElementById('edit-button');
       edit.onactivate = () => {
@@ -109,7 +107,6 @@ export const Pages = {
       editButton.text = exercises[tileInfo.index].name;
       editButton.onactivate = () => {
         app.selectExerciseTypeByIndex(tileInfo.index);
-        app.save();
         app.addSet();
         ui.transitionTo(Pages.weight);
       }
@@ -170,12 +167,11 @@ export const Pages = {
       const newReps = app.addReps(-1);
     },
     nextPageId: 'exercises',
-    beforeNextPage: (ui, app) => app.save(),
     prevPageId: 'weight'
   },
   sets: {
     id: 'sets',
-    mainHeight: () => app.getNumCurrentSets() > 0 ? 125 : 250,
+    mainHeight: (ui, app) => app.getNumCurrentSets() > 0 ? 125 : 250,
     activeElements: [
       'title',
       'main-text',

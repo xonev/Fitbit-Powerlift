@@ -14,8 +14,6 @@ export const Transitions = {
         mainText.style.display = 'none';
       }
 
-      const prevPageButton = u.getElement('home-button');
-      prevPageButton.text = 'Stats';
       const nextPageButton = u.getElement('next-page-button');
       nextPageButton.text = '+ Workout';
     },
