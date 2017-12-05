@@ -31,12 +31,25 @@ export function selectExerciseTypeByIndex(exercise, index) {
 
 export function addSet(exercise, set) {
   exercise.currentSet = set;
-  exercise.sets.push(set);
+  exercise.sets.unshift(set);
+  return exercise;
+}
+
+export function removeCurrentSet(exercise) {
+  console.log('finding index');
+  const currentSetIndex = exercise.sets.indexOf(exercise.currentSet);
+  console.log('removing at index');
+  exercise.sets.splice(currentSetIndex, 1);
+  exercise.currentSet = null;
   return exercise;
 }
 
 export function getSets(exercise) {
   return exercise.sets;
+}
+
+export function getNumSets(exercise) {
+  return exercise.sets.length;
 }
 
 export function selectCurrentSetByIndex(exercise, index) {

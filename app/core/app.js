@@ -52,10 +52,16 @@ export function build(dependencies = {}, initialState = {}) {
     return state.workouts.length;
   };
 
+  extern.getWorkouts = function() {
+    return state.workouts;
+  };
+
   extern.newWorkout = function() {
+    const workout = Workout.create();
     state = u.merge(state, {
-      currentWorkout: Workout.create()
+      currentWorkout: workout
     });
+    state.workouts.unshift(workout);
     notifyStateChange('currentWorkout', state.currentWorkout);
     return state;
   };
@@ -70,6 +76,10 @@ export function build(dependencies = {}, initialState = {}) {
 
   extern.getCurrentSets = function() {
     return Exercise.getSets(state.currentWorkout.currentExercise);
+  }
+
+  extern.getNumCurrentSets = function() {
+    return Exercise.getNumSets(state.currentWorkout.currentExercise);
   }
 
   extern.addExercise = function() {
@@ -96,6 +106,12 @@ export function build(dependencies = {}, initialState = {}) {
       set
     );
   }
+
+  extern.removeCurrentSet = function() {
+    console.log('removing current set');
+    state.currentWorkout.currentExercise = Exercise.removeCurrentSet(state.currentWorkout.currentExercise);
+    return state.currentWorkout.currentExercise;
+  };
 
   extern.addWeight = function(amount) {
     state.currentWorkout.currentExercise = Exercise.incrementCurrentSetWeight(
@@ -128,6 +144,10 @@ export function build(dependencies = {}, initialState = {}) {
     state.lastSets[currentExercise.type.id] = currentSet;
     return state.currentWorkout.currentExercise.currentSet.reps;
   }
+
+  extern.selectWorkoutByIndex = function(index) {
+    state.currentWorkout = state.workouts[index]
+  };
 
   extern.selectMuscleGroupByIndex = function(index) {
     state.currentWorkout.currentExercise = Exercise.selectMuscleGroupByIndex(

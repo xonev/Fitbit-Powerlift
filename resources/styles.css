@@ -40,7 +40,15 @@ textarea {
 }
 
 #next-page-button {
-  y: 38;
+  y: 43;
+  x: 50%;
+  width: 50%;
+}
+
+#home-button {
+  y: 43;
+  x: 0;
+  width: 50%;
 }
 
 .small-button {

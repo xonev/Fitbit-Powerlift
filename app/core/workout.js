@@ -1,6 +1,7 @@
 export function create() {
   return {
-    exercises: []
+    exercises: [],
+    createdAt: new Date
   };
 }
 
@@ -12,7 +13,7 @@ export function addExercise(workout, exercise) {
   if (!workout.exercises) {
     throw new Error('Invalid workout');
   }
-  workout.exercises.push(exercise);
+  workout.exercises.unshift(exercise);
   workout.currentExercise = exercise;
   return workout;
 }

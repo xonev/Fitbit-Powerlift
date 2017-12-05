@@ -4,19 +4,35 @@ import { MuscleGroups, ExercisesByGroup } from '../core/exercise/exercise_types'
 export const Pages = {
   home: {
     id: 'home',
-    mainHeight: () => 250,
+    mainHeight: (ui, app) => app.getNumWorkouts() > 0 ? 125 : 250,
     activeElements: [
       'title',
       'main-text',
+      'home-button',
       'next-page-button'
     ],
     stateToPresentations: [],
     nextPageId: 'exercises',
+    prevPageId: 'stats',
     beforeNextPage: (ui, app) => {
       app.newWorkout();
     },
-    getListLength: () => {
-      return 0;
+    getListLength: (ui, app) => app.getNumWorkouts(),
+    getTileInfo: (ui, app, index) => ({
+      type: 'editable-item-pool',
+      index
+    }),
+    configureTile: (ui, app, tile, tileInfo) => {
+      const workout = app.getWorkouts()[tileInfo.index];
+      const noun = workout.exercises.length === 1 ? 'exercise' : 'exercises';
+      const title = tile.getElementById('item-title');
+      title.text = `${workout.createdAt.toLocaleDateString()}: ${workout.exercises.length} exercises`;
+
+      const edit = tile.getElementById('edit-button');
+      edit.onactivate = () => {
+        app.selectWorkoutByIndex(tileInfo.index);
+        ui.transitionTo(Pages.exercises);
+      };
     }
   },
   exercises: {
@@ -25,10 +41,12 @@ export const Pages = {
     activeElements: [
       'title',
       'main-text',
+      'home-button',
       'next-page-button'
     ],
     stateToPresentations: [],
     nextPageId: 'muscleGroupSelection',
+    prevPageId: 'home',
     beforeNextPage: (ui, app) => {
       app.addExercise();
     },
@@ -103,6 +121,7 @@ export const Pages = {
       'add-button',
       'subtract-button',
       'main-datum',
+      'home-button',
       'next-page-button'
     ],
     stateToPresentations: [
@@ -119,7 +138,9 @@ export const Pages = {
     subtractButtonClicked: (ui, app) => {
       const newWeight = app.addWeight(-5);
     },
-    nextPageId: 'reps'
+    nextPageId: 'reps',
+    prevPageId: 'sets',
+    beforePrevPage: (ui, app) => app.removeCurrentSet()
   },
   reps: {
     id: 'reps',
@@ -129,6 +150,7 @@ export const Pages = {
       'add-button',
       'subtract-button',
       'main-datum',
+      'home-button',
       'next-page-button'
     ],
     stateToPresentations: [
@@ -145,21 +167,25 @@ export const Pages = {
     subtractButtonClicked: (ui, app) => {
       const newReps = app.addReps(-1);
     },
-    nextPageId: 'exercises'
+    nextPageId: 'exercises',
+    prevPageId: 'weight'
   },
   sets: {
     id: 'sets',
-    mainHeight: () => 125,
+    mainHeight: () => app.getNumCurrentSets() > 0 ? 125 : 250,
     activeElements: [
       'title',
+      'main-text',
+      'home-button',
       'next-page-button'
     ],
     stateToPresentations: [],
     nextPageId: 'weight',
+    prevPageId: 'exercises',
     beforeNextPage: (ui, app) => {
       app.addSet();
     },
-    getListLength: (ui, app) => app.getCurrentSets().length,
+    getListLength: (ui, app) => app.getNumCurrentSets(),
     getTileInfo: (ui, app, index) => ({
       type: 'editable-item-pool',
       index

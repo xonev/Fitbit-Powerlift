@@ -1,6 +1,4 @@
 <svg id="app">
-
-
   <defs>
     <symbol id="editable-item" pointer-events="visible" system-events="all" class="editable-item" href="#tile-list-item" display="none">
       <text id="item-title" class="editable-item-title">This is the title of an editable tile item.</text>
@@ -35,7 +33,7 @@
       <textarea id="main-text"
             font-weight="regular"
             font-size="24"
-            y="75%">
+            y="50%">
         The Main text goes here and it might be somewhat long.
       </textarea>
 
@@ -44,6 +42,9 @@
       </use>
       <use id="add-button" href="#square-button-neutral" class="small-button last-small-button">
         <set href="#text" attributeName="text-buffer" to="Add Button" />
+      </use>
+      <use id="home-button" href="#square-button-neutral">
+        <set href="#text" attributeName="text-buffer" to="Finished" />
       </use>
       <use id="next-page-button" href="#square-button-positive">
         <set href="#text" attributeName="text-buffer" to="Next Page Button" />

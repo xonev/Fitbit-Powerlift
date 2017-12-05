@@ -17,6 +17,7 @@ const button = getElement('add-button');
 const button2 = getElement('subtract-button');
 const weight = getElement('main-datum');
 const toRepsButton = getElement('next-page-button');
+const backButton = getElement('home-button');
 
 button.onactivate = (e) => {
   ui.addButtonClicked();
@@ -28,4 +29,8 @@ button2.onactivate = (e) => {
 
 toRepsButton.onactivate = (e) => {
   ui.nextPageClicked();
+};
+
+backButton.onactivate = (e) => {
+  ui.prevPageClicked();
 };
