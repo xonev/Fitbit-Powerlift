@@ -5,7 +5,12 @@
     "appDisplayName": "FitLift",
     "iconFile": "resources/icon.png",
     "wipeColor": "#607d8b",
-    "requestedPermissions": []
+    "requestedPermissions": [],
+    "i18n": {
+      "en": {
+        "name": "FitLift"
+      }
+    }
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --require babel-register"
