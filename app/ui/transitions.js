@@ -15,6 +15,12 @@ export const Transitions = {
         mainText.style.display = 'none';
       }
 
+      const prevPageButton = u.getElement('home-button');
+      if (app.isDirty()) {
+        prevPageButton.text = 'Save';
+      } else {
+        prevPageButton.text = 'Saved';
+      }
       const nextPageButton = u.getElement('next-page-button');
       nextPageButton.text = '+ Workout';
     },
@@ -31,7 +37,11 @@ export const Transitions = {
       }
 
       const prevPageButton = u.getElement('home-button');
-      prevPageButton.text = 'Home';
+      if (app.isDirty()) {
+        prevPageButton.text = 'Save';
+      } else {
+        prevPageButton.text = 'Home';
+      }
       const nextPageButton = u.getElement('next-page-button');
       nextPageButton.text = '+ Exercise';
     },

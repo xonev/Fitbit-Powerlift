@@ -2,7 +2,6 @@ import * as u from '../../common/util';
 import * as Workout from './workout';
 import * as Exercise from './exercise';
 import * as Set from './set';
-import {me} from 'appbit';
 
 export function build(dependencies = {}, initialState = {}) {
   initialState = initialState ? initialState : {};
@@ -10,6 +9,7 @@ export function build(dependencies = {}, initialState = {}) {
   const {persistence} = dependencies;
   const extern = {};
   const defaultInitialState = {
+    isDirty: false,
     workouts: [],
     currentWorkout: null,
     lastSets: {}
@@ -37,15 +37,28 @@ export function build(dependencies = {}, initialState = {}) {
     }, state);
   }
 
+  function makeDirty() {
+    state.isDirty = true;
+  }
+
+  function makeClean() {
+    state.isDirty = false;
+  }
+
   function saveState() {
     const {workouts, lastSets} = state;
     persistence.saveState({
       workouts,
       lastSets
     });
+    makeClean();
   }
 
-  me.onunload = saveState;
+  extern.save = saveState;
+
+  extern.isDirty = function() {
+    return state.isDirty;
+  };
 
   extern.subscribeToStateChange = function(statePathId, callback) {
     if (!stateChangeSubscriptions[statePathId]) {
@@ -77,6 +90,7 @@ export function build(dependencies = {}, initialState = {}) {
     });
     state.workouts = u.prependWithMaxLength(3, state.workouts, workout);
     notifyStateChange('currentWorkout', state.currentWorkout);
+    makeDirty();
     return state;
   };
 
@@ -98,6 +112,8 @@ export function build(dependencies = {}, initialState = {}) {
 
   extern.addExercise = function() {
     state.currentWorkout = Workout.addExercise(state.currentWorkout, Exercise.create());
+    makeDirty();
+    return state.currentWorkout;
   };
 
   extern.addSet = function() {
@@ -119,10 +135,13 @@ export function build(dependencies = {}, initialState = {}) {
       state.currentWorkout.currentExercise,
       set
     );
+    makeDirty();
+    return state.currentWorkout.currentExercise;
   }
 
   extern.removeCurrentSet = function() {
     state.currentWorkout.currentExercise = Exercise.removeCurrentSet(state.currentWorkout.currentExercise);
+    makeDirty();
     return state.currentWorkout.currentExercise;
   };
 
@@ -139,6 +158,7 @@ export function build(dependencies = {}, initialState = {}) {
     const {currentSet} = currentExercise;
 
     state.lastSets[currentExercise.type.id] = currentSet;
+    makeDirty();
     return state.currentWorkout.currentExercise.currentSet.weight;
   };
 
@@ -155,6 +175,7 @@ export function build(dependencies = {}, initialState = {}) {
     const {currentSet} = currentExercise;
 
     state.lastSets[currentExercise.type.id] = currentSet;
+    makeDirty();
     return state.currentWorkout.currentExercise.currentSet.reps;
   }
 
@@ -167,6 +188,9 @@ export function build(dependencies = {}, initialState = {}) {
       state.currentWorkout.currentExercise,
       index
     );
+
+    makeDirty();
+    return state.currentWorkout.currentExercise;
   }
 
   extern.selectExerciseTypeByIndex = function(index) {
@@ -174,6 +198,9 @@ export function build(dependencies = {}, initialState = {}) {
       state.currentWorkout.currentExercise,
       index
     );
+
+    makeDirty();
+    return state.currentWorkout.currentExercise;
   }
 
   extern.selectExerciseByIndex = function(index) {

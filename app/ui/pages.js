@@ -1,4 +1,5 @@
 import * as Exercise from '../core/exercise';
+import * as u from './util';
 import { MuscleGroups, ExercisesByGroup } from '../core/exercise/exercise_types';
 
 export const Pages = {
@@ -8,13 +9,23 @@ export const Pages = {
     activeElements: [
       'title',
       'main-text',
+      'home-button',
       'next-page-button'
     ],
     stateToPresentations: [],
     nextPageId: 'exercises',
-    prevPageId: 'stats',
     beforeNextPage: (ui, app) => {
       app.newWorkout();
+    },
+    prevPageClicked: (ui, app) => {
+      if (app.isDirty()) {
+        const homeButton = u.getElement('home-button');
+        homeButton.text = 'Saving...';
+        setTimeout(() => {
+          app.save();
+          homeButton.text = 'Saved';
+        }, 5);
+      }
     },
     getListLength: (ui, app) => app.getNumWorkouts(),
     getTileInfo: (ui, app, index) => ({
@@ -45,9 +56,20 @@ export const Pages = {
     ],
     stateToPresentations: [],
     nextPageId: 'muscleGroupSelection',
-    prevPageId: 'home',
     beforeNextPage: (ui, app) => {
       app.addExercise();
+    },
+    prevPageClicked: (ui, app) => {
+      if (app.isDirty()) {
+        const homeButton = u.getElement('home-button');
+        homeButton.text = 'Saving...';
+        setTimeout(() => {
+          app.save();
+          homeButton.text = 'Home';
+        }, 5);
+      } else {
+        ui.transitionTo(Pages.home);
+      }
     },
     getListLength: (ui, app) => app.getNumExercises(),
     getTileInfo: (ui, app, index) => ({

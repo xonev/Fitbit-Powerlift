@@ -105,10 +105,14 @@ export function build(dependencies = {}, initialState = {}) {
   };
 
   extern.prevPageClicked = function() {
-    if (state.currentPage.beforePrevPage) {
-      state.currentPage.beforePrevPage(extern, app);
+    if (state.currentPage.prevPageClicked) {
+      state.currentPage.prevPageClicked(extern, app);
+    } else {
+      if (state.currentPage.beforePrevPage) {
+        state.currentPage.beforePrevPage(extern, app);
+      }
+      transitionTo(Pages[state.currentPage.prevPageId]);
     }
-    transitionTo(Pages[state.currentPage.prevPageId]);
   };
 
   return extern;
