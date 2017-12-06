@@ -3,6 +3,8 @@ import * as Workout from './workout';
 import * as Exercise from './exercise';
 import * as Set from './set';
 
+const maxSets = 50;
+
 export function build(dependencies = {}, initialState = {}) {
   initialState = initialState ? initialState : {};
 
@@ -104,11 +106,22 @@ export function build(dependencies = {}, initialState = {}) {
 
   extern.getCurrentSets = function() {
     return Exercise.getSets(state.currentWorkout.currentExercise);
-  }
+  };
 
-  extern.getNumCurrentSets = function() {
+  const getNumCurrentSets = function() {
     return Exercise.getNumSets(state.currentWorkout.currentExercise);
-  }
+  };
+
+  extern.getNumCurrentSets = getNumCurrentSets;
+
+  extern.isNumSetsMaxed = function() {
+    const numSets = state.workouts.reduce(function (total, workout) {
+      return total + workout.exercises.reduce(function (exerciseTotal, exercise) {
+        return exerciseTotal + exercise.sets.length;
+      }, 0);
+    }, 0);
+    return numSets >= maxSets;
+  };
 
   extern.addExercise = function() {
     state.currentWorkout = Workout.addExercise(state.currentWorkout, Exercise.create());
@@ -120,9 +133,9 @@ export function build(dependencies = {}, initialState = {}) {
     let set;
     if (
       state.currentWorkout.currentExercise.type &&
-      state.lastSets[state.currentWorkout.currentExercise.type.id]
+      state.lastSets[state.currentWorkout.currentExercise.type]
     ) {
-      const {id} = state.currentWorkout.currentExercise.type;
+      const id = state.currentWorkout.currentExercise.type;
       const {weight, reps} = state.lastSets[id];
       set = Set.create({
         weight,
@@ -157,7 +170,7 @@ export function build(dependencies = {}, initialState = {}) {
     const {currentExercise} = state.currentWorkout;
     const {currentSet} = currentExercise;
 
-    state.lastSets[currentExercise.type.id] = currentSet;
+    state.lastSets[currentExercise.type] = currentSet;
     makeDirty();
     return state.currentWorkout.currentExercise.currentSet.weight;
   };
@@ -174,7 +187,7 @@ export function build(dependencies = {}, initialState = {}) {
     const {currentExercise} = state.currentWorkout;
     const {currentSet} = currentExercise;
 
-    state.lastSets[currentExercise.type.id] = currentSet;
+    state.lastSets[currentExercise.type] = currentSet;
     makeDirty();
     return state.currentWorkout.currentExercise.currentSet.reps;
   }

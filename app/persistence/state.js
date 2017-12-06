@@ -9,7 +9,6 @@ export function build(dependencies) {
 
   extern.saveState = (state) => {
     const {workouts, lastSets} = state;
-    const workoutFilenames = workouts.map(workout => `workout-${workout.createdAt}.json`);
     const manifest = {workouts: []};
     for (let i in workouts) {
       const workout = workouts[i];
@@ -25,7 +24,7 @@ export function build(dependencies) {
     }
     for (let i in manifest.workouts) {
       const workout = manifest.workouts[i];
-      const workoutFilename = `${workout.createdAt}`;
+      const workoutFilename = `${workout.createdAt}.json`;
       fs.writeFileSync(workoutFilename, workout, 'json');
       delete loadedFilenames[workoutFilename];
       manifest.workouts[i] = workoutFilename;

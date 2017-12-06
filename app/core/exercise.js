@@ -12,13 +12,12 @@ export function create() {
     muscleGroup: null,
     type: null,
     sets: [],
-    currentSet: null,
-    createdAt: new Date().toISOString()
+    currentSet: null
   };
 }
 
 export function selectMuscleGroupByIndex(exercise, index) {
-  exercise.muscleGroup = MuscleGroups()[index];
+  exercise.muscleGroup = MuscleGroups()[index].id;
   return exercise;
 }
 
@@ -26,21 +25,30 @@ export function selectExerciseTypeByIndex(exercise, index) {
   if (!exercise.muscleGroup) {
     throw new Error('Must have a muscle group first');
   }
-  exercise.type = ExercisesByGroup[exercise.muscleGroup.id]()[index];
+  exercise.type = ExercisesByGroup[exercise.muscleGroup]()[index].id;
   return exercise;
 }
 
 export function getShortName(exercise) {
-  if (exercise.type.name.length < 18) {
-    return exercise.type.name;
+  const exercises = ExercisesByGroup[exercise.muscleGroup]();
+  let exerciseName = null;
+  for (let i in exercises) {
+    const currExercise = exercises[i];
+    if (exercise.type === currExercise.id) {
+      exerciseName = currExercise.name;
+      break;
+    }
+  }
+  if (exerciseName.length < 18) {
+    return exerciseName;
   } else {
-    return `${exercise.type.name.slice(0, 15)}...`;
+    return `${exerciseName.slice(0, 15)}...`;
   }
 }
 
 export function addSet(exercise, set) {
   exercise.currentSet = set;
-  exercise.sets = u.prependWithMaxLength(5, exercise.sets, set);
+  exercise.sets.unshift(set);
   return exercise;
 }
 

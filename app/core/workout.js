@@ -3,7 +3,7 @@ import * as u from '../../common/util';
 export function create() {
   return {
     exercises: [],
-    createdAt: new Date().toISOString()
+    createdAt: new Date().valueOf()
   };
 }
 
@@ -15,7 +15,7 @@ export function addExercise(workout, exercise) {
   if (!workout.exercises) {
     throw new Error('Invalid workout');
   }
-  workout.exercises = u.prependWithMaxLength(5, workout.exercises, exercise);
+  workout.exercises.unshift(exercise);
   workout.currentExercise = exercise;
   return workout;
 }

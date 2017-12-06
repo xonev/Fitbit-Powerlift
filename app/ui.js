@@ -98,8 +98,10 @@ export function build(dependencies = {}, initialState = {}) {
   };
 
   extern.nextPageClicked = function() {
-    if (state.currentPage.beforeNextPage) {
-      state.currentPage.beforeNextPage(extern, app);
+    if (state.currentPage.beforeNextPage &&
+      state.currentPage.beforeNextPage(extern, app) === false
+    ) {
+        return;
     }
     transitionTo(Pages[state.currentPage.nextPageId]);
   };

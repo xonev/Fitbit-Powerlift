@@ -42,8 +42,13 @@ export const Transitions = {
       } else {
         prevPageButton.text = 'Home';
       }
+
       const nextPageButton = u.getElement('next-page-button');
-      nextPageButton.text = '+ Exercise';
+      if (app.isNumSetsMaxed()) {
+        nextPageButton.text = 'Maxed';
+      } else {
+        nextPageButton.text = '+ Exercise';
+      }
     },
     muscleGroupSelection: (app) => {
       const titleText = u.getElement('title');
@@ -88,7 +93,11 @@ export const Transitions = {
       titleText.text = `${Exercise.getShortName(app.getCurrentExercise())}: Sets`;
 
       const nextPageButton = u.getElement('next-page-button');
-      nextPageButton.text = '+ Set';
+      if (app.isNumSetsMaxed()) {
+        nextPageButton.text = 'Sets Maxed';
+      } else {
+        nextPageButton.text = '+ Set';
+      }
 
       const prevPageButton = u.getElement('home-button');
       prevPageButton.text = 'Back';

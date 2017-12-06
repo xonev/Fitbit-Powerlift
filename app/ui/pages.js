@@ -57,6 +57,9 @@ export const Pages = {
     stateToPresentations: [],
     nextPageId: 'muscleGroupSelection',
     beforeNextPage: (ui, app) => {
+      if (app.isNumSetsMaxed()) {
+        return false;
+      }
       app.addExercise();
     },
     prevPageClicked: (ui, app) => {
@@ -118,14 +121,14 @@ export const Pages = {
       'title'
     ],
     stateToPresentations: [],
-    getListLength: (ui, app) => ExercisesByGroup[app.getCurrentExercise().muscleGroup.id]().length,
+    getListLength: (ui, app) => ExercisesByGroup[app.getCurrentExercise().muscleGroup]().length,
     getTileInfo: (ui, app, index) => ({
       type: 'selectable-item-pool',
       index
     }),
     configureTile: (ui, app, tile, tileInfo) => {
       const editButton = tile.getElementById('select-button');
-      const exercises = ExercisesByGroup[app.getCurrentExercise().muscleGroup.id]();
+      const exercises = ExercisesByGroup[app.getCurrentExercise().muscleGroup]();
       editButton.text = exercises[tileInfo.index].name;
       editButton.onactivate = () => {
         app.selectExerciseTypeByIndex(tileInfo.index);
@@ -204,6 +207,9 @@ export const Pages = {
     nextPageId: 'weight',
     prevPageId: 'exercises',
     beforeNextPage: (ui, app) => {
+      if (app.isNumSetsMaxed()) {
+        return false;
+      }
       app.addSet();
     },
     getListLength: (ui, app) => app.getNumCurrentSets(),
