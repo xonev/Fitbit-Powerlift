@@ -29,7 +29,7 @@ export function build(dependencies = {}, initialState = {}) {
     page.stateToPresentations.forEach(stateToPresentation => {
       const {elementId, elementAttribute, transform, statePathId} = stateToPresentation;
       const subscriptionId = app.subscribeToStateChange(statePathId, newState => {
-        uiu.getElement(elementId)[elementAttribute] = transform(newState);
+        uiu.getElement(elementId)[elementAttribute] = transform(extern, app, newState);
       });
       state.stateChangeSubscriptions.push(subscriptionId);
     });

@@ -8,7 +8,7 @@ const maxSets = 50;
 export function build(dependencies = {}, initialState = {}) {
   initialState = initialState ? initialState : {};
 
-  const {persistence} = dependencies;
+  const {persistence, settings} = dependencies;
   const extern = {};
   const defaultInitialState = {
     isDirty: false,
@@ -230,9 +230,9 @@ export function build(dependencies = {}, initialState = {}) {
     );
   }
 
-  extern.getCurrentExercise = function() {
-    return state.currentWorkout.currentExercise;
-  }
+  extern.getCurrentExercise = () => state.currentWorkout.currentExercise;
+
+  extern.getWeightUnit = () => settings.weightUnit;
 
   return extern;
 }

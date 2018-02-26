@@ -65,9 +65,9 @@ export const Transitions = {
       const subtractButton = u.getElement('subtract-button');
       const mainDatum = u.getElement('main-datum');
       const nextPageButton = u.getElement('next-page-button');
-      addButton.text = '+5 lbs';
-      subtractButton.text = '-5 lbs';
-      mainDatum.text = '20 lbs';
+      addButton.text = `+5 ${app.getWeightUnit()}`;
+      subtractButton.text = `-5 ${app.getWeightUnit()}`;
+      mainDatum.text = `20 ${app.getWeightUnit()}`;
       nextPageButton.text = 'To Reps';
 
       const prevPageButton = u.getElement('home-button');

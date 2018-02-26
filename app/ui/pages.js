@@ -153,7 +153,7 @@ export const Pages = {
         statePathId: Exercise.notifyIds.currentSetWeight,
         elementId: 'main-datum',
         elementAttribute: 'text',
-        transform: lbs => `${lbs} lbs`
+        transform: (ui, app, weight) => `${weight} ${app.getWeightUnit()}`
       }
     ],
     addButtonClicked: (ui, app) => {
@@ -182,7 +182,7 @@ export const Pages = {
         statePathId: Exercise.notifyIds.currentSetReps,
         elementId: 'main-datum',
         elementAttribute: 'text',
-        transform: reps => `${reps} reps`
+        transform: (ui, app, reps) => `${reps} reps`
       }
     ],
     addButtonClicked: (ui, app) => {
@@ -220,7 +220,7 @@ export const Pages = {
     configureTile: (ui, app, tile, tileInfo) => {
       const title = tile.getElementById('item-title');
       const set = app.getCurrentSets()[tileInfo.index];
-      title.text = `${set.weight} lbs x ${set.reps} reps`;
+      title.text = `${set.weight} ${app.getWeightUnit()} x ${set.reps} reps`;
 
       const edit = tile.getElementById('edit-button');
       edit.onactivate = () => {
