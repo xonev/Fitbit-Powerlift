@@ -6,7 +6,6 @@ const WeightUnits = {
   us: 'lb'
 };
 
-console.log(units.weight);
 export function build(dependencies) {
   const extern = {};
 
